@@ -21,8 +21,8 @@ class CreateBooksTable extends Migration
             //calculated from the average of users rates
             $table->decimal('rate');
             $table->unsignedInteger('price');
-            $table->integer('page_count');
-            $table->integer('no_copies');
+            $table->unsignedInteger('page_count');
+            $table->unsignedInteger('no_copies');
             $table->foreign('category_id')
                   ->references('id')->on('categories')
                   ->onDelete('cascade');

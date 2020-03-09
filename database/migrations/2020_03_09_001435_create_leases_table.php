@@ -18,7 +18,7 @@ class CreateLeasesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('book_id');
             //number of days
-            $table->Integer('duration');
+            $table->unsignedInteger('duration');
             $table->foreign('user_id')
                   ->references('id')->on('users')
                   ->onDelete('cascade');
