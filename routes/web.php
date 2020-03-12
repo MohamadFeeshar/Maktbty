@@ -23,9 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/dashboard', 'AdminController@admin')->middleware('auth')->middleware('is_admin')->name('admin');
 Route::resource('users', 'UserController');
 
-Route::get('/dashboard/users', function () {
-    return view('admin.users');
-});
+Route::get('/dashboard/users', 'UserController@index');
 
 Route::get('/dashboard/categories', function () {
     return view('admin.categories');
