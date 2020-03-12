@@ -29,6 +29,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/dashboard', 'AdminController@admin')->middleware('auth')->middleware('is_admin')->name('admin');
 Route::resource('users', 'UserController');
+Route::resource('admins', 'AdminController');
 
 Route::get('/dashboard/users', 'UserController@index');
 Route::get('/dashboard/editUser', 'UserController@edit');
@@ -44,6 +45,5 @@ Route::get('/dashboard/books', function () {
 Route::get('/book', function () {
     return view('book');
 });
-Route::get('/dashboard/admins', function () {
-    return view('admin.admins');
-});
+Route::get('/dashboard/admins','AdminController@index');
+Route::get('/dashboard/editAdmin', 'AdminController@edit');
