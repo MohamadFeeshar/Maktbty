@@ -21,7 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'AdminController@admin')->middleware('is_admin')->name('admin');
-
+Route::get('/book', function () {
+    return view('book');
+});
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 });

@@ -1,0 +1,12 @@
+.imagesContainer{
+    height: 200px;
+    width: 100%;
+    overflow-x: scroll; 
+    white-space: nowrap;
+    overflow-y: hidden;
+}
+.slide-img{
+    display: inline-block;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
