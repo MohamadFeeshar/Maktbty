@@ -1,19 +1,3 @@
-<!--
-
-=========================================================
-* Now UI Dashboard - v1.5.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard
-* Copyright 2019 Creative Tim (http://www.creative-tim.com)
-
-* Designed by www.invisionapp.com Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +11,7 @@
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
+  @stack('table-styles')
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <!-- CSS Files -->
@@ -39,62 +24,78 @@
 <body class="">
   <div class="wrapper ">
 
-    <div class="sidebar" data-color="blue"><!--Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"-->
+    <div class="sidebar" data-color="blue">
+      <!--Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"-->
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-        <li>
-            <a href="./">
+          <li class="nav-item dropdown">
+            <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+              {{ Auth::user()->name }} <span class="caret"></span>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>
+            </div>
+          </li>
+          <li>
+            <a href="/dashboard">
               <i class="now-ui-icons design_app"></i>
               <h2>Home</h2>
             </a>
           </li>
           <li>
-            <a href="./users">
+            <a href="/dashboard/users">
               <i class="now-ui-icons design_app"></i>
               <h2>Users</h2>
             </a>
           </li>
           <li>
-            <a href="./categories">
+            <a href="/dashboard/categories">
               <i class="now-ui-icons education_atom"></i>
               <h5>Categories</h5>
             </a>
           </li>
           <li>
-            <a href="./books">
+            <a href="/dashboard/books">
               <i class="now-ui-icons location_map-big"></i>
               <h2>Books</h2>
             </a>
           </li>
           <li>
-            <a href="./admins">
+            <a href="/dashboard/admins">
               <i class="now-ui-icons ui-1_bell-53"></i>
               <h2>Admins</h2>
             </a>
           </li>
-          
         </ul>
       </div>
     </div>
 
     <!-- End sidebar -->
 
-    <div class="main-panel" id="main-panel"> 
- 
-    
+    <div class="main-panel" id="main-panel">
 
-<div class="panel-header panel-header-sm">
+
+
+      <div class="panel-header panel-header-sm">
       </div>
 
       <div class="content">
-      @yield('content')  
-      
+        @yield('content')
+
       </div>
-     
-    <!-- end Content  -->
-    <footer class="footer">
-      
-    </footer>
+
+      <!-- end Content  -->
+      <footer class="footer">
+
+      </footer>
     </div>
 
 

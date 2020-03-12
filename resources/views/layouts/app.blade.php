@@ -26,6 +26,7 @@
     <link href="css/shop-homepage.css" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('css-styles')
 </head>
 <body>
     <div id="app">
