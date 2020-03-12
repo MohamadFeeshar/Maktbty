@@ -63,104 +63,57 @@ Dashboard
             <td>{{ $user->address }}</td>
             <td>{{ $user->phone }}</td>
             <td>
-              <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-              <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+              <a class="edit" href={{ route("users.edit",$user->id) }} ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+              {!! Form::open(['route' => ['users.destroy',$user->id],'method' => 'DELETE']) !!}
+              <input type="submit" class="btn btn-danger" value="Delete">
+              {!! Form::close() !!}
+
             </td>
           </tr>
           @endforeach
         </tbody>
       </table>
     </div>
-    <!-- Edit Modal HTML -->
+    <!-- Add Modal HTML -->
     <div id="addEmployeeModal" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form>
-            <div class="modal-header">
-              <h4 class="modal-title">Add User</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          {!! Form::open(['route' => 'users.store','method' => 'post']) !!}
+          <div class="modal-header">
+            <h4 class="modal-title">Add User</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input name="name" type="text" class="form-control" required>
             </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label>Address</label>
-                <textarea class="form-control" required></textarea>
-              </div>
-              <div class="form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" required>
-              </div>
+            <div class="form-group">
+              <label>username</label>
+              <input name="username" type="text" class="form-control" required>
             </div>
-            <div class="modal-footer">
-              <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-              <input type="submit" class="btn btn-success" value="Add">
+            <div class="form-group">
+              <label>Email</label>
+              <input name="email" type="email" class="form-control" required>
             </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- Edit Modal HTML -->
-    <div id="editEmployeeModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <form>
-            <div class="modal-header">
-              <h4 class="modal-title">Edit User</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="form-group">
+              <label>Password</label>
+              <input name="password" type="text" class="form-control" required>
             </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label>Address</label>
-                <textarea class="form-control" required></textarea>
-              </div>
-              <div class="form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" required>
-              </div>
+            <div class="form-group">
+              <label>Address</label>
+              <textarea name="address" class="form-control" required></textarea>
             </div>
-            <div class="modal-footer">
-              <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-              <input type="submit" class="btn btn-info" value="Save">
+            <div class="form-group">
+              <label>Phone</label>
+              <input name="phone" type="text" class="form-control" required>
             </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- Delete Modal HTML -->
-    <div id="deleteEmployeeModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-        @if(isset($user))
-        {!! Form::open(['route' => ['users.destroy',$user->id],'method' => 'DELETE']) !!}
-            <div class="modal-header">
-              <h4 class="modal-title">Delete User</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-              <p>Are you sure you want to delete these Records?</p>
-              <p class="text-warning"><small>This action cannot be undone.</small></p>
-            </div>
-            <div class="modal-footer">
-              <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-              <input type="submit" class="btn btn-danger" value="Delete">
-            </div>
-						{!! Form::close() !!}
-        @endif
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+            <input type="submit" class="btn btn-success" value="Add">
+          </div>
+          {!! Form::close() !!}
         </div>
       </div>
     </div>

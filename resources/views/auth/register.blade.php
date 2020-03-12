@@ -13,7 +13,7 @@
 		<div class="login-form">
 			<div class="sign-in-htm">
             <div class="group">
-					<label for="name" class="label">Name</label>
+					<label for="name" class="label">Full Name</label>
 					<input id="name" name="name" type="text" class="input" required autocomplete="name" autofocus>
                     @error('name')
                         <span class="invalid-feedback" role="alert">

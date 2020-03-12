@@ -24,6 +24,7 @@ Route::get('/dashboard', 'AdminController@admin')->middleware('auth')->middlewar
 Route::resource('users', 'UserController');
 
 Route::get('/dashboard/users', 'UserController@index');
+Route::get('/dashboard/editUser', 'UserController@edit');
 
 Route::get('/dashboard/categories', function () {
     return view('admin.categories');

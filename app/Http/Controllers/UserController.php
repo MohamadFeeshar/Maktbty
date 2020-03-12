@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\User;
 use Auth;
 
@@ -38,7 +38,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect('/dashboard/users');
     }
 
     /**
@@ -60,7 +68,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.editUser', ['user' => $user]);
     }
 
     /**
@@ -72,7 +81,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect('/dashboard/users');
     }
 
     /**
@@ -85,7 +102,6 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        $users = User::where('type', 'default')->get();
-        return view('admin.users', ['users' => $users]);
+        return redirect('/dashboard/users');
     }
 }
