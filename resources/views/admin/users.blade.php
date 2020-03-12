@@ -44,6 +44,7 @@ Dashboard
             <th>Email</th>
             <th>Address</th>
             <th>Phone</th>
+            <th>Ban</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -62,7 +63,10 @@ Dashboard
             <td>{{ $user->address }}</td>
             <td>{{ $user->phone }}</td>
             <td>
-              <a class="edit" href={{ route("users.edit",$user->id) }} ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+              <input type="checkbox" data-id="{{ $user->id }}" name="status" class="js-switch" {{ $user->status == 1 ? 'checked' : '' }}>
+            </td>
+            <td>
+              <a class="edit" href={{ route("users.edit",$user->id) }}><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
               {!! Form::open(['route' => ['users.destroy',$user->id],'method' => 'DELETE']) !!}
               <input type="submit" class="btn btn-danger" value="Delete">
               {!! Form::close() !!}
@@ -149,5 +153,21 @@ Dashboard
       }
     });
   });
+
+  $(document).ready(function(){
+    $('.js-switch').change(function () {
+        let status = $(this).prop('checked') === true ? 1 : 0;
+        let userId = $(this).data('id');
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '{{ route('users.ban') }}',
+            data: {'status': status, 'user_id': userId},
+            success: function (data) {
+                console.log(data.message);
+            }
+        });
+    });
+});
 </script>
 @endsection

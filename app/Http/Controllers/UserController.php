@@ -14,6 +14,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function ban(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $user->status = $request->status;
+        $user->save();
+        return redirect('/dashboard/users');
+    }
+
     public function index()
     {
         $users = User::where('type', 'default')->get();
