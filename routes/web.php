@@ -28,11 +28,11 @@ Auth::routes();
 // });
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/dashboard', 'AdminController@admin')->middleware('auth')->middleware('is_admin')->name('admin');
-Route::resource('users', 'UserController');
-Route::resource('admins', 'AdminController');
+Route::resource('users', 'UserController')->middleware('auth');
+Route::resource('admins', 'AdminController')->middleware('auth');
 
-Route::get('/dashboard/users', 'UserController@index');
-Route::get('/dashboard/editUser', 'UserController@edit');
+Route::get('/dashboard/users', 'UserController@index')->middleware('auth');
+Route::get('/dashboard/editUser', 'UserController@edit')->middleware('auth');
 
 Route::get('/dashboard/categories', function () {
     return view('admin.categories');
@@ -45,5 +45,5 @@ Route::get('/dashboard/books', function () {
 Route::get('/book', function () {
     return view('book');
 });
-Route::get('/dashboard/admins','AdminController@index');
-Route::get('/dashboard/editAdmin', 'AdminController@edit');
+Route::get('/dashboard/admins','AdminController@index')->middleware('auth');
+Route::get('/dashboard/editAdmin', 'AdminController@edit')->middleware('auth');
