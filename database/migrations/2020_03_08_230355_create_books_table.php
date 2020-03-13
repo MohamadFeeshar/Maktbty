@@ -27,6 +27,7 @@ class CreateBooksTable extends Migration
                   ->references('id')->on('categories')
                   ->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
