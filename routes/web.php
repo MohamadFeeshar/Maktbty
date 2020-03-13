@@ -22,24 +22,24 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'AdminController@admin')->middleware('is_admin')->name('admin');
 
-Route::get('/dashboard', function () {
+Route::get('/admin', function () {
     return view('admin.dashboard');
 });
 
 
-Route::get('/dashboard/users', function () {
+Route::get('/admin/users', function () {
     return view('admin.users');
 });
 
-Route::get('/dashboard/categories', function () {
+Route::get('/admin/categories', function () {
     return view('admin.categories');
 });
 
-Route::get('/dashboard/books', function () {
+Route::get('/admin/books', function () {
     return view('admin.books');
 });
 
 
-Route::get('/dashboard/admins', function () {
+Route::get('/admin/admins', function () {
     return view('admin.admins');
 });

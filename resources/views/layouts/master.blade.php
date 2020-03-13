@@ -43,31 +43,31 @@
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
         <li>
-            <a href="./">
+            <a href={{ route("admin") }}>
               <i class="now-ui-icons design_app"></i>
               <h2>Home</h2>
             </a>
           </li>
           <li>
-            <a href="./users">
+            <a href="./admin/users">
               <i class="now-ui-icons design_app"></i>
               <h2>Users</h2>
             </a>
           </li>
           <li>
-            <a href="./categories">
+            <a href="./admin/categories">
               <i class="now-ui-icons education_atom"></i>
               <h5>Categories</h5>
             </a>
           </li>
           <li>
-            <a href="./books">
+            <a href="./admin/books">
               <i class="now-ui-icons location_map-big"></i>
               <h2>Books</h2>
             </a>
           </li>
           <li>
-            <a href="./admins">
+            <a href="./admin/admins">
               <i class="now-ui-icons ui-1_bell-53"></i>
               <h2>Admins</h2>
             </a>
