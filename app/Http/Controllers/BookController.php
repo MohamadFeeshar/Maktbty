@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Book;
 
 class BookController extends Controller
 {
@@ -13,7 +14,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::all();
+        return view('admin.books', ['books' => $books]);   
     }
 
     /**
@@ -34,7 +36,14 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = new Book();
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->category_id = $request->category_id;
+        $book->price = $request->price;
+        $book->no_copies = $request->no_copies;
+        $book->save();
+        return redirect('/dashboard/books');
     }
 
     /**
@@ -56,7 +65,8 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::find($id);
+        return view('admin.editBook', ['book' => $book]);
     }
 
     /**
@@ -68,7 +78,14 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $book = Book::find($id);
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->category_id = $request->category_id;
+        $book->price = $request->price;
+        $book->no_copies = $request->no_copies;
+        $book->save();
+        return redirect('/dashboard/books');
     }
 
     /**
@@ -79,6 +96,8 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::find($id);
+        $book->delete();
+        return redirect('/dashboard/books');
     }
 }
