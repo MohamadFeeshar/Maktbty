@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 
-class AdminController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,22 +15,18 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
+    public function ban(Request $request)
     {
-        $this->middleware('auth');
-    }
-
-    public function admin()
-    {
-        // return view('admin');
-        return view('admin.dashboard');
+        $user = User::findOrFail($request->user_id);
+        $user->status = $request->status;
+        $user->save();
+        return redirect('/dashboard/users');
     }
 
     public function index()
     {
-        $loggedAdmin = Auth::user();
-        $admins = User::where('type', 'admin')->where('id', '!=', $loggedAdmin->id)->get();
-        return view('admin.admins', ['admins' => $admins]);
+        $users = User::where('type', 'default')->get();
+        return view('admin.users', ['users' => $users]);
     }
 
     /**
@@ -51,16 +47,15 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        $admin = new User();
-        $admin->name = $request->name;
-        $admin->username = $request->username;
-        $admin->email = $request->email;
-        $admin->phone = $request->phone;
-        $admin->address = $request->address;
-        $admin->type = 'admin';
-        $admin->password = Hash::make($request->password);
-        $admin->save();
-        return redirect('/dashboard/admins');
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect('/dashboard/users');
     }
 
     /**
@@ -82,8 +77,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $admin = User::find($id);
-        return view('admin.editAdmin', ['admin' => $admin]);
+        $user = User::find($id);
+        return view('admin.editUser', ['user' => $user]);
     }
 
     /**
@@ -95,15 +90,15 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $admin = User::find($id);
-        $admin->name = $request->name;
-        $admin->username = $request->username;
-        $admin->email = $request->email;
-        $admin->phone = $request->phone;
-        $admin->address = $request->address;
-        $admin->password = Hash::make($request->password);
-        $admin->save();
-        return redirect('/dashboard/admins');
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect('/dashboard/users');
     }
 
     /**
@@ -114,8 +109,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $admin = User::find($id);
-        $admin->delete();
-        return redirect('/dashboard/admins');
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/dashboard/users');
     }
 }
