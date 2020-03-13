@@ -28,29 +28,25 @@
   
     <div class="col-md-9">
         <div class="row">
+       
         @foreach($book_data as $book)
-            <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="col-sm-4 col-lg-4 col-md-4"  class="column {{$book->category_id}}">
                 <div class="thumbnail">
-
-              
-                    <img src="http://placehold.it/320x150" alt="">
+                <!-- http://placehold.it/320x150 -->
+                    <img src="{{$book ->pic}}" alt="{{$book -> title}}">
                     <div class="caption">  
-      
                         <h4 class="pull-right">${{$book -> price}}</h4>
                         <h4><a href="#">{{$book -> title}}</a>
                         </h4>
                         <p> snippets like this online store item , book pages are {{$book -> page_count}}, author is {{$book -> author}}<a target="_blank" href="http://www.bootsnipp.com">See more</a>.</p>
                        <div> available copies :{{$book -> no_copies}}</div>
-
                     </div>
                     <div class="ratings">
                         <p class="pull-right">15 reviews</p>
                         <p>
+                        @foreach($book_data as $rate)
                             <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
+                       @endforeach
                         </p>
                     </div>
                   
@@ -58,6 +54,7 @@
             </div>
             @endforeach
        </div>
+       {{$book_data -> links()}}
 
     </div>
  

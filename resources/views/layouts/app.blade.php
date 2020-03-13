@@ -53,6 +53,28 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <div class="container">
+                        
+                        <span> Order By</span>
+                         <span class="input-group-btn" name="orderBy">
+                                <button type="submit" name="latest" class="btn btn-secondary">Latest</button>
+                                <button class="btn btn-secondary" name="price" type="submit" >Price</button>
+                        </span>                        
+                        
+                        </div>
+                            <div class="container">
+                                <div class="col-sm-8">
+                                    <form action="home" method="GET">
+                                        {{csrf_field()}}
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="searchTerm" placeholder="Search by name or author for..." value="{{ isset($searchTerm) ? $searchTerm : '' }}">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-secondary" type="submit">Search</button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
