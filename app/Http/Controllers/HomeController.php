@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $list = \App\Category::all();
+        $bookData= \App\Book::all();
+        return view('home', ['list_category' => $list, 'book_data'=>$bookData]);     
     }
 }
