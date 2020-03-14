@@ -41,7 +41,7 @@ class CommentController extends Controller
         // var_dump(Auth::id());
         // die();
         $comment->user_id = Auth::id();
-        $comment->book_id = 1;
+        $comment->book_id = $request->book_id;
         $comment->content = $request->comment;
         $comment->rate = 4;
         $comment->save();

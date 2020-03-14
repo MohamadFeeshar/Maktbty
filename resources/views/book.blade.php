@@ -109,6 +109,7 @@
                           {!! Form::open(['route' => 'comments.store','method' => 'POST' , 'book_id' => $book->id]) !!}
                           <textarea class="form-control" id="exampleFormControlTextarea1" name='comment' rows="3" placeholder="add comment here"></textarea>
                           <button type='submit' class="btn">Comment</button>
+                          <input type="hidden" name="book_id" value="{{$book->id}}">
                           {!! Form::close() !!}
                         </div>
                         </li>

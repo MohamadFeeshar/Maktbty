@@ -34,7 +34,7 @@ class LeaseController extends Controller
      */
     public function store(Request $request)
     {
-        echo ($request->book_id);
+        // echo ($request->book_id);
         // var_dump($request->duration);
         // die();
         $lease = new Lease();
