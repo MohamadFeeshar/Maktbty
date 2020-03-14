@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Book;
+use App\Category;
 
 class BookController extends Controller
 {
@@ -17,7 +18,8 @@ class BookController extends Controller
     {
            
         $books = Book::all();
-        return view('admin.books', ['books' => $books]);   
+        $categories = Category::all();
+        return view('admin.books', ['books' => $books, 'categories' => $categories]);   
     }
 
     public function getBookDetails(Request $request)
@@ -36,7 +38,7 @@ class BookController extends Controller
         return view('book', ['book' => $book, 'comments' => $comments] );
     }
 
-
+    
     
     /**
      * Show the form for creating a new resource.
@@ -56,6 +58,12 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string|unique:books',
+            'author' => 'required|string',
+            'price' => 'required|numeric',
+            'no_copies' => 'required|numeric'
+        ]);
         $book = new Book();
         $book->title = $request->title;
         $book->author = $request->author;
@@ -86,7 +94,8 @@ class BookController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
-        return view('admin.editBook', ['book' => $book]);
+        $categories = Category::pluck('name', 'id');
+        return view('admin.editBook', ['book' => $book,'categories' => $categories]);
     }
 
     /**
@@ -98,6 +107,12 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|string|unique:books',
+            'author' => 'required|string',
+            'price' => 'required|numeric',
+            'no_copies' => 'required|numeric'
+        ]);
         $book = Book::find($id);
         $book->title = $request->title;
         $book->author = $request->author;

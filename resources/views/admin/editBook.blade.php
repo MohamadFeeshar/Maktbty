@@ -18,6 +18,9 @@ Dashboard
                 <div class="form-group">
                     <label>Title</label>
                     {!! Form::text('title', $value = null, ['class' => 'form-control']) !!}
+                    @error('title')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>author</label>
@@ -25,7 +28,8 @@ Dashboard
                 </div>
                 <div class="form-group">
                     <label>Category</label>
-                    {!! Form::text('category_id', $value = null, ['class' => 'form-control']) !!}
+                    {!! Form::select('category_id',$categories, null, ['class' => 'form-control']) !!}
+                    <!-- {!! Form::text('category_id', $value = null, ['class' => 'form-control']) !!} -->
                 </div>
                 <div class="form-group">
                     <label>Price</label>

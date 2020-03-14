@@ -78,6 +78,7 @@
     </div> -->
     <section class="product-sec">
         <div class="container">
+            
         @foreach ($book as $book)
   
        
@@ -90,31 +91,9 @@
                             <div class="active item carousel-item" data-slide-number="0">
                                 <img src="images/product1.jpg" class="img-fluid">
                             </div>
-                            <!-- <div class="item carousel-item" data-slide-number="1">
-                                <img src="images/product2.jpg" class="img-fluid">
-                            </div>
-                            <div class="item carousel-item" data-slide-number="2">
-                                <img src="images/product3.jpg" class="img-fluid">
-                            </div> -->
+                           
                         </div>
-                        <!-- main slider carousel nav controls -->
-                        <!-- <ul class="carousel-indicators list-inline">
-                            <li class="list-inline-item active">
-                                <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#myCarousel">
-                                <img src="images/product1.jpg" class="img-fluid">
-                            </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a id="carousel-selector-1" data-slide-to="1" data-target="#myCarousel">
-                                <img src="images/product2.jpg" class="img-fluid">
-                            </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a id="carousel-selector-2" data-slide-to="2" data-target="#myCarousel">
-                                <img src="images/product3.jpg" class="img-fluid">
-                            </a>
-                            </li>
-                        </ul> -->
+                        
                     </div>
                     <!--/main slider carousel-->
                 </div>
@@ -127,8 +106,10 @@
                         <li>
                         <div class="form-group">
                           <label for="exampleInputEmail1">Review</label>
-                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placae></textarea>
-                          <button class="btn ">Comment</button>
+                          {!! Form::open(['route' => 'comments.store','method' => 'POST' , '$id' => $book->id]) !!}
+                          <textarea class="form-control" id="exampleFormControlTextarea1" name='comment' rows="3" placeholder="add comment here"></textarea>
+                          <button type='submit' class="btn">Comment</button>
+                          {!! Form::close() !!}
                         </div>
                         </li>
                     </ul>
