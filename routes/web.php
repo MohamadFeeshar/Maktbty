@@ -32,6 +32,7 @@ Route::resource('users', 'UserController')->middleware('auth');
 Route::resource('admins', 'AdminController')->middleware('auth');
 Route::resource('books', 'BookController')->middleware('auth');
 Route::resource('categories', 'CategoryController')->middleware('auth');
+Route::resource('comments','CommentController')->middleware('auth');
 
 Route::get('/dashboard/users', 'UserController@index')->middleware('auth');
 Route::get('/dashboard/editUser', 'UserController@edit')->middleware('auth');
@@ -44,12 +45,12 @@ Route::get('/dashboard/books', 'BookController@index');
 Route::get('/book', function () {
     return view('book');
 });
-
-Route::get('/book2', function () {
-    return view('book2');
-});
+// Route::get('book/comment', 'CommentController@store')->middleware('auth');
+// Route::get('/book2', function () {
+//     return view('book2');
+// });
 Route::get('/dashboard/admins', 'AdminController@index')->middleware('auth');
 Route::get('/dashboard/editAdmin', 'AdminController@edit')->middleware('auth');
 
 
-Route::get('/book', 'BookController@getBookDetails')->middleware('auth');
+Route::get('/book', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');
