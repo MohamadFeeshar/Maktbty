@@ -101,7 +101,12 @@ Dashboard
             </div>
             <div class="form-group">
               <label>Category</label>
-              <input name="category_id" type="text" class="form-control" required>
+              <!-- <input name="category_id" type="text" class="form-control" required> -->
+              <select class="form-control" name="category_id">
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+              </select>
             </div>
             <div class="form-group">
               <label>Price</label>

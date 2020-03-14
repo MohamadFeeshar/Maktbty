@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Book;
+use App\Category;
 
 class BookController extends Controller
 {
@@ -17,7 +18,8 @@ class BookController extends Controller
     {
            
         $books = Book::all();
-        return view('admin.books', ['books' => $books]);   
+        $categories = Category::all();
+        return view('admin.books', ['books' => $books, 'categories' => $categories]);   
     }
 
     public function getBookDetails(Request $request)
@@ -92,7 +94,8 @@ class BookController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
-        return view('admin.editBook', ['book' => $book]);
+        $categories = Category::pluck('name', 'id');
+        return view('admin.editBook', ['book' => $book,'categories' => $categories]);
     }
 
     /**

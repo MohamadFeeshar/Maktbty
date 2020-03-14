@@ -28,7 +28,8 @@ Dashboard
                 </div>
                 <div class="form-group">
                     <label>Category</label>
-                    {!! Form::text('category_id', $value = null, ['class' => 'form-control']) !!}
+                    {!! Form::select('category_id',$categories, null, ['class' => 'form-control']) !!}
+                    <!-- {!! Form::text('category_id', $value = null, ['class' => 'form-control']) !!} -->
                 </div>
                 <div class="form-group">
                     <label>Price</label>
