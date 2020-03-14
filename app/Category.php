@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $table='categories';
-    
+    use softDeletes;
     public function books(){
         return $this->hasMany('App\Book');
     }
