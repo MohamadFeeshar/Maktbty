@@ -36,7 +36,7 @@ class BookController extends Controller
         return view('book', ['book' => $book, 'comments' => $comments] );
     }
 
-
+    
     
     /**
      * Show the form for creating a new resource.
