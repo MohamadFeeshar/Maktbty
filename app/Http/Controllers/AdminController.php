@@ -51,6 +51,14 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'username' => 'required|string|max:50|unique:users',
+            'email' => 'required|string|email|unique:users',
+            'phone' => 'required|digits:11|unique:users',
+            'address' => 'required|string',
+            'password' => 'required|string|min:8'
+
+        ]);
         $admin = new User();
         $admin->name = $request->name;
         $admin->username = $request->username;
@@ -95,6 +103,14 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'username' => 'required|string|max:50|unique:users',
+            'email' => 'required|string|email|unique:users',
+            'phone' => 'required|digits:11|unique:users',
+            'address' => 'required|string',
+            'password' => 'required|string|min:8'
+
+        ]);
         $admin = User::find($id);
         $admin->name = $request->name;
         $admin->username = $request->username;

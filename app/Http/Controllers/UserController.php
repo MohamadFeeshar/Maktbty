@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::where('type', 'default')->get();
+        $users = User::where('type', 'user')->get();
         return view('admin.users', ['users' => $users]);
     }
 
@@ -47,6 +47,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'username' => 'required|string|max:50|unique:users',
+            'email' => 'required|string|email|unique:users',
+            'phone' => 'required|digits:11|unique:users',
+            'address' => 'required|string',
+            'password' => 'required|string|min:8'
+
+        ]);
         $user = new User();
         $user->name = $request->name;
         $user->username = $request->username;
@@ -90,6 +98,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'username' => 'required|string|max:50|unique:users',
+            'email' => 'required|string|email|unique:users',
+            'phone' => 'required|digits:11|unique:users',
+            'address' => 'required|string',
+            'password' => 'required|string|min:8'
+
+        ]);
         $user = User::find($id);
         $user->name = $request->name;
         $user->username = $request->username;
