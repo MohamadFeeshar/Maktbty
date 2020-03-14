@@ -18,6 +18,9 @@ Dashboard
                 <div class="form-group">
                     <label>Name</label>
                     {!! Form::text('name', $value = null, ['class' => 'form-control']) !!}
+                    @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Description</label>

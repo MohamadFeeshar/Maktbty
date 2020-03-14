@@ -36,6 +36,9 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|unique:books',
+        ]);
         $book = new Book();
         $book->title = $request->title;
         $book->author = $request->author;
@@ -78,6 +81,9 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|unique:books',
+        ]);
         $book = Book::find($id);
         $book->title = $request->title;
         $book->author = $request->author;

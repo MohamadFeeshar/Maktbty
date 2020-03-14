@@ -15,35 +15,35 @@
 			<input id="tab-2" type="radio" name="tab" class="for-pwd"><label for="tab-2" class="tab">Forgot Password</label>
 			<div class="login-form">
 				<div class="sign-in-htm">
+					@error('username')
+					<div class="alert alert-danger">
+						<strong>{{ $message }}</strong>
+					</div>
+					@enderror
 					<div class="group">
 						<label for="username" class="label">Username</label>
-						<input id="username" name="username" type="text" class="input" autofocus>
+						<input id="username" name="username" type="text" class="input" required autofocus>
+
 					</div>
 					<div class="group">
 						<label for="password" class="label">Password</label>
 						<input id="password" name="password" type="password" class="input" data-type="password" required>
-						@error('password')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-						@enderror
+						<div class="group">
+							<input type="submit" class="button" value="Sign In">
+						</div>
+						<div class="hr"></div>
 					</div>
-					<div class="group">
-						<input type="submit" class="button" value="Sign In">
+					<div class="for-pwd-htm">
+						<div class="group">
+							<label for="user" class="label">Username or Email</label>
+							<input id="user" type="text" class="input">
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Reset Password">
+						</div>
+						<div class="hr"></div>
 					</div>
-					<div class="hr"></div>
 				</div>
-				<div class="for-pwd-htm">
-					<div class="group">
-						<label for="user" class="label">Username or Email</label>
-						<input id="user" type="text" class="input">
-					</div>
-					<div class="group">
-						<input type="submit" class="button" value="Reset Password">
-					</div>
-					<div class="hr"></div>
-				</div>
-			</div>
 		</form>
 	</div>
 </div>

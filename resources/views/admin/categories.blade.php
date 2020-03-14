@@ -30,6 +30,15 @@ Dashboard
           </div>
         </div>
       </div>
+      @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
       <table class="table table-striped table-hover">
         <thead>
           <tr>
@@ -62,7 +71,6 @@ Dashboard
               {!! Form::open(['route' => ['categories.destroy',$category->id],'method' => 'DELETE']) !!}
               <input type="submit" class="btn btn-danger" value="Delete">
               {!! Form::close() !!}
-
             </td>
           </tr>
           @endforeach
@@ -88,6 +96,7 @@ Dashboard
               <input name="desc" type="text" class="form-control" required>
             </div>
           </div>
+
           <div class="modal-footer">
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
             <input type="submit" class="btn btn-success" value="Add">
