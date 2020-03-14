@@ -45,5 +45,11 @@ Route::get('/book', function () {
     return view('book');
 });
 
+Route::get('/book2', function () {
+    return view('book2');
+});
 Route::get('/dashboard/admins', 'AdminController@index')->middleware('auth');
 Route::get('/dashboard/editAdmin', 'AdminController@edit')->middleware('auth');
+
+
+Route::get('/book', 'BookController@getBookDetails')->middleware('auth');
