@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Book;
@@ -12,12 +13,31 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+           
         $books = Book::all();
         return view('admin.books', ['books' => $books]);   
     }
 
+    public function getBookDetails(Request $request)
+    {
+           
+            $book = DB::table('books')
+        ->join('categories', 'books.category_id', '=', 'categories.id')
+        ->select('books.*', 'categories.name')
+        ->get();
+
+        $comments =  DB::table('comments')
+        ->join('books', 'comments.book_id', '=', 'books.id')
+        ->select('comments.*')
+        ->get();
+
+        return view('book', ['book' => $book, 'comments' => $comments] );
+    }
+
+
+    
     /**
      * Show the form for creating a new resource.
      *
