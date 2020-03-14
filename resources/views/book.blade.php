@@ -116,15 +116,30 @@
                     <div class="btn-sec">
                      <p>Rate : {{$book->rate}}</p>
                       <p>Avaliable Copies: {{$book->no_copies}}</p>
-                      <button class="btn ">Lease</button>
+                      <a href="#leaseBook" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Lease</span></a>
                     </div>
-
+                    
                 </div>
 
             </div>
         </div>
         @endforeach
-
+        
+        <div id="leaseBook" class="modal fade">
+            <div class="modal-content">
+                {!! Form::open(['route' => 'lease.store','method' => 'POST','$id' => $book->id]) !!}
+                <div class="modal-body">
+                    <div class="form-group">
+                      <label>Duration in Days</label>
+                      <input name="duration" type="text" class="form-control" required>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-success" value="Add">
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
 
 
         <!-- Comments -->
