@@ -17,10 +17,12 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
+            $table->string('pic')->nullable();
             $table->unsignedBigInteger('category_id');
             //calculated from the average of users rates
             $table->decimal('rate')->nullable();
             $table->unsignedInteger('price');
+            $table->string('summary')->nullable();
             $table->unsignedInteger('page_count')->nullable();
             $table->unsignedInteger('no_copies');
             $table->foreign('category_id')
