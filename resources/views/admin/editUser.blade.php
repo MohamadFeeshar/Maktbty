@@ -22,22 +22,37 @@ Dashboard
                 <div class="form-group">
                     <label>username</label>
                     {!! Form::text('username', $value = null, ['class' => 'form-control']) !!}
+                    @error('username')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Email</label>
                     {!! Form::email('email', $value = null, ['class' => 'form-control']) !!}
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Password</label>
                     {{ Form::password('password', ['class' => 'form-control','required']) }}
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Address</label>
                     {!! Form::textarea('address', $value = null, ['class' => 'form-control']) !!}
+                    @error('address')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Phone</label>
                     {!! Form::text('phone', $value = null, ['class' => 'form-control']) !!}
+                    @error('phone')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="modal-footer">
