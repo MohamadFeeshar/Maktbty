@@ -43,5 +43,15 @@ class HomeController extends Controller
          'book_data'=>$bookData ]);
        }
     }
-      
+    public function category(Request $request)
+    {
+        $list = \App\Category::all();
+
+        $categoryItems = $request->input('categoryTerm');
+        $bookData = \App\Book::where('category_id', 'like','%' .$categoryItems. '%')->orderBy('created_at', 'DESC')->paginate(3);
+
+        return view ('bookcategory',['list_category' => $list, 'book_data'=>$bookData
+        ,compact('bookData')
+        ]);
+    }
 }
