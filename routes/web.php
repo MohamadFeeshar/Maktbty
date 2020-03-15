@@ -55,3 +55,4 @@ Route::get('/dashboard/editAdmin', 'AdminController@edit')->middleware('auth');
 
 Route::get('/book', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');
 Route ::get('/category','HomeController@category')->name('category');
+Route ::get('/order','HomeController@order')->name('order');

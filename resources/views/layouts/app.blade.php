@@ -56,11 +56,19 @@
                         <div class="container">
                         
                         <span> Order By</span>
-                         <span class="input-group-btn" name="orderBy">
-                                <button type="submit" name="latest" class="btn btn-secondary">Latest</button>
-                                <button class="btn btn-secondary" name="price" type="submit" >Price</button>
-                        </span>                        
-                        
+                        <div class="col-sm-8">
+                                    <form action="order" method="GET">
+                                        {{csrf_field()}}
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                            <button type="submit" name="order" class="btn btn-secondary"value="created_at">Latest</button>
+                                            <button class="btn btn-secondary" name="order" type="submit" value="price">Price</button>
+
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                              
                         </div>
                             <div class="container">
                                 <div class="col-sm-8">
