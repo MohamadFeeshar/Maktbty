@@ -63,7 +63,7 @@
                     <div class="btn-sec">
                      <!-- <p>Rate : {{$book->rate}}</p> -->
                      <!-- Rate -->
-
+                        
                      <!-- End Rate -->
                       <p>Avaliable Copies: {{$book->no_copies}}</p>
                       <button class="btn ">Lease</button>
