@@ -37,7 +37,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:categories',
+            'name' => 'required|unique:categories,name,NULL,id,deleted_at,NULL',
             'desc' => 'required|string'
         ]);
         $category = new Category();
@@ -80,7 +80,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|unique:categories',
+            'name' => "required|unique:categories,name,{$id},id,deleted_at,NULL",
             'desc' => 'required|string'
         ]);
         $category = Category::find($id);
