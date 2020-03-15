@@ -6,45 +6,44 @@
 
 
 @section('content')
-    
-<div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title"> Home Table</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <th>
-                        Status
-                      </th>
-                      <th>
-                        Status
-                      </th>
-                      <th>
-                        Any
-                      </th>
-                      <th class="text-right">
-                        Dum
-                      </th>
-                    </thead>
-
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="card card-plain">
-              <div class="card-header">
-              </div>
-              
-            </div>
-          </div>
-        </div>
-
+<?php
+     
+     $dataPoints = array();
+      foreach($profit as $val){
+        array_push($dataPoints, array("y" => $val->profit, "label" => date('M j', strtotime($val->date))));
+      }
+     ?>
+     <!DOCTYPE HTML>
+     <html>
+     <head>
+     <script>
+     window.onload = function () {
+      
+     var chart = new CanvasJS.Chart("chartContainer", {
+       title: {
+         text: "Profit Over a Week"
+       },
+       axisX: {
+         title: "Week",
+       },
+       axisY: {
+         title: "Profit"
+       },
+       data: [{
+         type: "line",
+         dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+       }]
+     });
+     chart.render();
+      
+     }
+     </script>
+     </head>
+     <body>
+     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+     </body>
+     </html>  
 @endsection
 
 

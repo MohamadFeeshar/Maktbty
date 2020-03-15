@@ -34,13 +34,13 @@ Route::resource('books', 'BookController')->middleware('auth');
 Route::resource('categories', 'CategoryController')->middleware('auth');
 Route::resource('comments','CommentController')->middleware('auth');
 Route::resource('lease','LeaseController')->middleware('auth');
-Route::get('/dashboard/users', 'UserController@index')->middleware('auth');
-Route::get('/dashboard/editUser', 'UserController@edit')->middleware('auth');
+Route::get('/dashboard/users', 'UserController@index')->middleware('auth')->middleware('is_admin');
+Route::get('/dashboard/editUser', 'UserController@edit')->middleware('auth')->middleware('is_admin');
 Route::get('users', 'UserController@ban')->name('users.ban');
 
-Route::get('/dashboard/categories', 'CategoryController@index');
+Route::get('/dashboard/categories', 'CategoryController@index')->middleware('is_admin');
 
-Route::get('/dashboard/books', 'BookController@index');
+Route::get('/dashboard/books', 'BookController@index')->middleware('is_admin');
 
 
 Route::get('/dashboard/admins', 'AdminController@index')->middleware('auth');
@@ -48,3 +48,6 @@ Route::get('/dashboard/editAdmin', 'AdminController@edit')->middleware('auth');
 
 Route::get('book/{book}', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');
 
+Route::get('/book', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');
+Route ::get('/category','HomeController@category')->name('category');
+Route ::get('/order','HomeController@order')->name('order');

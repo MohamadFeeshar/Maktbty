@@ -48,12 +48,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:50|unique:users',
-            'email' => 'required|string|email|unique:users',
-            'phone' => 'required|digits:11|unique:users',
+            'username' => 'required|string|max:50|unique:users,username,NULL,id,deleted_at,NULL',
+            'email' => 'required|string|email|unique:users,email,NULL,id,deleted_at,NULL',
+            'phone' => 'required|digits:11|unique:users,phone,NULL,id,deleted_at,NULL',
             'address' => 'required|string',
             'password' => 'required|string|min:8'
-
         ]);
         $user = new User();
         $user->name = $request->name;
@@ -99,12 +98,11 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'username' => 'required|string|max:50|unique:users',
-            'email' => 'required|string|email|unique:users',
-            'phone' => 'required|digits:11|unique:users',
+            'username' => "required|string|max:50|unique:users,username,{$id},id,deleted_at,NULL",
+            'email' => "required|string|email|unique:users,email,{$id},id,deleted_at,NULL",
+            'phone' => "required|digits:11|unique:users,phone,{$id},id,deleted_at,NULL",
             'address' => 'required|string',
             'password' => 'required|string|min:8'
-
         ]);
         $user = User::find($id);
         $user->name = $request->name;
