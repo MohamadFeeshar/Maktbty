@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\New_;
-use App\Comment;
-class CommentController extends Controller
+use App\Lease;
+class LeaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,16 +34,14 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-
-        $comment = new Comment();
-        
-        // var_dump(Auth::id());
+        // echo ($request->book_id);
+        // var_dump($request->duration);
         // die();
-        $comment->user_id = Auth::id();
-        $comment->book_id = $request->book_id;
-        $comment->content = $request->comment;
-        $comment->rate = 4;
-        $comment->save();
+        $lease = new Lease();
+        $lease->user_id = Auth::id();
+        $lease->book_id = $request->book_id;
+        $lease->duration = $request->duration;
+        $lease->save();
         return redirect()->route('books.getdetails');
     }
 
@@ -80,6 +77,7 @@ class CommentController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
     }
 
     /**

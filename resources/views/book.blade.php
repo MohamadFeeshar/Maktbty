@@ -53,9 +53,10 @@
                         <li>
                         <div class="form-group">
                           <label for="exampleInputEmail1">Review</label>
-                          {!! Form::open(['route' => 'comments.store','method' => 'POST' , '$id' => $book->id]) !!}
+                          {!! Form::open(['route' => 'comments.store','method' => 'POST' , 'book_id' => $book->id]) !!}
                           <textarea class="form-control" id="exampleFormControlTextarea1" name='comment' rows="3" placeholder="add comment here"></textarea>
                           <button type='submit' class="btn">Comment</button>
+                          <input type="hidden" name="book_id" value="{{$book->id}}">
                           {!! Form::close() !!}
                         </div>
                         </li>
@@ -66,15 +67,31 @@
                         
                      <!-- End Rate -->
                       <p>Avaliable Copies: {{$book->no_copies}}</p>
-                      <button class="btn ">Lease</button>
+                      <a href="#leaseBook" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Lease</span></a>
                     </div>
-
+                    
                 </div>
-
+                <div id="leaseBook" class="modal fade">
+                    <div class="modal-content">
+                        {!! Form::open(['route' => 'lease.store','method' => 'POST','book_id' => $book->id]) !!}
+                        <div class="modal-body">
+                            <div class="form-group">
+                              <label>Duration in Days</label>
+                              <input name="duration" type="text" class="form-control" required>
+                            </div>
+                            <div class="modal-footer">
+                            <input type="submit" class="btn btn-success" value="Add">
+                            <input type="hidden" name="book_id" value="{{$book->id}}">
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         @endforeach
-
+        
+        
 
 
         <!-- Comments -->
