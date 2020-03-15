@@ -51,7 +51,7 @@
                         <h4 class="pull-right">${{$book -> price}}</h4>
                         <h4><a href="#">{{$book -> title}}</a>
                         </h4>
-                        <p> snippets like this online store item , book pages are {{$book -> page_count}}, author is {{$book -> author}}<a target="_blank" href="http://www.bootsnipp.com">See more</a>.</p>
+                        <p> {{$book->summary}} , book pages are {{$book -> page_count}}, author is {{$book -> author}}<a target="_blank" href="http://www.bootsnipp.com">See more</a>.</p>
                        <div> available copies :{{$book -> no_copies}}</div>
                     </div>
                     <div class="ratings">
