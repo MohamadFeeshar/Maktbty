@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Book;
 use App\Category;
+use App\Comment;
 
 class BookController extends Controller
 {
@@ -22,18 +23,17 @@ class BookController extends Controller
         return view('admin.books', ['books' => $books, 'categories' => $categories]);   
     }
 
-    public function getBookDetails(Request $request)
+    public function getBookDetails($id)
     {
-           
-            $book = DB::table('books')
-        ->join('categories', 'books.category_id', '=', 'categories.id')
-        ->select('books.*', 'categories.name')
-        ->get();
+       $book = new Book();
+       $comments = new Comment();
 
-        $comments =  DB::table('comments')
-        ->join('books', 'comments.book_id', '=', 'books.id')
-        ->select('comments.*')
-        ->get();
+       $book = Book::find($id);
+       $comments = Comment::where('book_id',$id)->get();
+    //    dd($comments);
+    //    die();
+
+
 
         return view('book', ['book' => $book, 'comments' => $comments] );
     }
@@ -47,7 +47,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+    
     }
 
     /**

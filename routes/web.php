@@ -42,15 +42,9 @@ Route::get('/dashboard/categories', 'CategoryController@index');
 
 Route::get('/dashboard/books', 'BookController@index');
 
-Route::get('/book', function () {
-    return view('book');
-});
-// Route::get('book/comment', 'CommentController@store')->middleware('auth');
-// Route::get('/book2', function () {
-//     return view('book2');
-// });
+
 Route::get('/dashboard/admins', 'AdminController@index')->middleware('auth');
 Route::get('/dashboard/editAdmin', 'AdminController@edit')->middleware('auth');
 
+Route::get('book/{book}', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');
 
-Route::get('/book', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');

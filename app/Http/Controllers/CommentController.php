@@ -45,7 +45,9 @@ class CommentController extends Controller
         $comment->content = $request->comment;
         $comment->rate = 4;
         $comment->save();
-        return redirect()->route('books.getdetails');
+        return back()->withInput();
+        // return redirect()->route('books.getdetails', ['id' => Auth::id() ]);
+        // return redirect()->route('books.getdetails');
     }
 
     /**
