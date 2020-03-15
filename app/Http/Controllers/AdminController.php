@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Lease;
 use App\User;
 use Auth;
 
@@ -22,8 +23,18 @@ class AdminController extends Controller
 
     public function admin()
     {
-        // return view('admin');
-        return view('admin.dashboard');
+        $previous_week = strtotime("-1 week +1 day");
+        $start_week = strtotime("last sunday midnight", $previous_week);
+        $end_week = strtotime("next saturday", $start_week);
+        $start_week = date("Y-m-d", $start_week);
+        $end_week = date("Y-m-d", $end_week);
+        $lastWeekLease=Lease::select(Lease::raw('SUM(price*duration) AS profit,DATE(leases.created_at) as date'))
+                            ->join('books','books.id','=','book_id')
+                            ->whereBetween('leases.created_at', [$start_week, $end_week])
+                            ->orderBy('date', 'asc')
+                            ->groupBy('date')
+                            ->get();
+        return view('admin.dashboard',['profit'=>$lastWeekLease]);
     }
 
     public function index()
