@@ -30,12 +30,9 @@ class BookController extends Controller
 
        $book = Book::find($id);
        $comments = Comment::where('book_id',$id)->get();
-    //    dd($comments);
-    //    die();
-
-
-
-        return view('book', ['book' => $book, 'comments' => $comments] );
+       $related = Book::where('category_id',$book->category_id)->get();
+   
+        return view('book', ['book' => $book, 'comments' => $comments, 'related' => $related] );
     }
 
     
