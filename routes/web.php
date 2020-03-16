@@ -27,6 +27,8 @@ Auth::routes();
 //     return view('admin.dashboard');
 // });
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/favorites', 'FavoriteController@index')->middleware('auth');
+Route::get('/myBooks', 'LeaseController@index')->middleware('auth');
 Route::get('/dashboard', 'AdminController@admin')->middleware('auth')->middleware('is_admin')->name('admin');
 Route::resource('users', 'UserController')->middleware('auth')->middleware('is_admin');
 Route::resource('admins', 'AdminController')->middleware('auth')->middleware('is_admin');
@@ -42,16 +44,11 @@ Route::get('/dashboard/categories', 'CategoryController@index')->middleware('is_
 
 Route::get('/dashboard/books', 'BookController@index')->middleware('is_admin');
 
-Route::get('/book', function () {
-    return view('book');
-});
-// Route::get('book/comment', 'CommentController@store')->middleware('auth');
-// Route::get('/book2', function () {
-//     return view('book2');
-// });
-Route::get('/dashboard/admins', 'AdminController@index')->middleware('auth')->middleware('is_admin');
-Route::get('/dashboard/editAdmin', 'AdminController@edit')->middleware('auth')->middleware('is_admin');
 
+Route::get('/dashboard/admins', 'AdminController@index')->middleware('auth');
+Route::get('/dashboard/editAdmin', 'AdminController@edit')->middleware('auth');
+
+Route::get('book/{book}', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');
 
 Route::get('/book', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');
 Route ::get('/category','HomeController@category')->name('category');

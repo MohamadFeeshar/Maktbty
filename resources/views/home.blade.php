@@ -41,7 +41,7 @@
   
     <div class="col-md-9">
         <div class="row">
-       
+
         @foreach($book_data as $book)
             <div class="col-sm-4 col-lg-4 col-md-4"  class="column {{$book->category_id}}">
                 <div class="thumbnail">
@@ -49,7 +49,8 @@
                     <img src="{{$book ->pic}}" alt="{{$book -> title}}">
                     <div class="caption">  
                         <h4 class="pull-right">${{$book -> price}}</h4>
-                        <h4><a href="#">{{$book -> title}}</a>
+                        <h4><a href="{{url('book').'/'.$book->id}}">{{$book -> title}}</a>
+                        
                         </h4>
                         <p> {{$book->summary}} , book pages are {{$book -> page_count}}, author is {{$book -> author}}<a target="_blank" href="http://www.bootsnipp.com">See more</a>.</p>
                        <div> available copies :{{$book -> no_copies}}</div>

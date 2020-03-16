@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\User;
 use App\Lease;
+use Auth;
+
+
 class LeaseController extends Controller
 {
     /**
@@ -13,6 +18,9 @@ class LeaseController extends Controller
      */
     public function index()
     {
+        $userId = Auth::id();
+        $books = DB::table('books')->rightJoin('leases', 'books.id', '=', 'leases.book_id', 'leases.user_id', '=', $userId)->get();
+        return view('user.myBooks')->with(['books'=>$books]);
         //
     }
 
@@ -34,6 +42,7 @@ class LeaseController extends Controller
      */
     public function store(Request $request)
     {
+        //
         // echo ($request->book_id);
         // var_dump($request->duration);
         // die();
