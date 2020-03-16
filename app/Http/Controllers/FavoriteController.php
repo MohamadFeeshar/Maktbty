@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\User;
+use App\Favorite;
+use Auth;
 
 class FavoriteController extends Controller
 {
@@ -13,7 +17,11 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        //
+        $userId = Auth::id();
+        //$favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
+        $books = DB::table('books')->rightJoin('favorites', 'books.id', '=', 'favorites.book_id', 'favorites.user_id', '=', $userId)->get();
+        //return dd(gettype($books));
+        return view('user.favorites')->with(['books'=>$books]);
     }
 
     /**
