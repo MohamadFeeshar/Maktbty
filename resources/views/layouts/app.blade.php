@@ -21,6 +21,7 @@
 
   <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="fontawesome-free-5.12.1-web/css/all.css">
 
 <!-- Add custom CSS here -->
     <link href="css/shop-homepage.css" rel="stylesheet">

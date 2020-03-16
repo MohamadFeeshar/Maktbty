@@ -42,7 +42,17 @@ class FavoriteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = \App\Book::orderBy('price', 'DESC')->paginate(3);
+        $categories = \App\Category::all();
+     
+        // $request->validate(['book_id' => 'Null|unique:favorites']);
+        $favorites =new Favorite();
+        $favorites->user_id = Auth::id();
+        $favorites->book_id = $request->input('favouriteTerm');
+        $favorites->save();
+    
+        return view('home', ['list_category' => $categories, 
+        'book_data'=>$book ]);
     }
 
     /**

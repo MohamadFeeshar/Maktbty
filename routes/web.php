@@ -53,3 +53,4 @@ Route::get('book/{book}', 'BookController@getBookDetails')->name('books.getdetai
 Route::get('/book', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');
 Route ::get('/category','HomeController@category')->name('category');
 Route ::get('/order','HomeController@order')->name('order');
+Route ::get('/favourite','FavoriteController@store')->name('favourite');
