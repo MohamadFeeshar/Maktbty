@@ -2,34 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Book Store</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#03a6f3">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-<link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-</head>
-<style>
-    .star-rating {
-  line-height:32px;
-  font-size:1.25em;
-}
-
-.star-rating .fa-star{color: yellow;}
-</style>
-
-<body>
   
     <section class="product-sec">
         <div class="container">
@@ -127,7 +100,7 @@
                               <img src="http://lorempixel.com/40/40/people/1/">
                             </a>
                             <div class="media-body">    
-                              <h4 class="media-heading user_name">User Name</h4>
+                              <h4 class="media-heading user_name">User no.{{$comment->user_id}}</h4>
                               <small class="pull-right">{{$comment->created_at}}</small>
                               <p>{{$comment->content}}</p>
                               <p>{{$comment->rate}}</p>
@@ -171,8 +144,8 @@
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/rating.js"></script>
-</body>
 
-</html>
+
+
 
 @endsection
