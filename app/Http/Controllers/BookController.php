@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -17,26 +18,26 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-           
+
         $books = Book::all();
         $categories = Category::all();
-        return view('admin.books', ['books' => $books, 'categories' => $categories]);   
+        return view('admin.books', ['books' => $books, 'categories' => $categories]);
     }
 
     public function getBookDetails($id)
     {
-       $book = new Book();
-       $comments = new Comment();
+        $book = new Book();
+        $comments = new Comment();
 
-       $book = Book::find($id);
-       $comments = Comment::where('book_id',$id)->get();
-       $related = Book::where('category_id',$book->category_id)->get();
-   
-        return view('book', ['book' => $book, 'comments' => $comments, 'related' => $related] );
+        $book = Book::find($id);
+        $comments = Comment::where('book_id', $id)->get();
+        $related = Book::where('category_id', $book->category_id)->get();
+
+        return view('book', ['book' => $book, 'comments' => $comments, 'related' => $related]);
     }
 
-    
-    
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -44,7 +45,6 @@ class BookController extends Controller
      */
     public function create()
     {
-    
     }
 
     /**
@@ -58,12 +58,18 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|string|unique:books,title,NULL,id,deleted_at,NULL',
             'author' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required|numeric',
             'no_copies' => 'required|numeric'
         ]);
+        $image = $request->file('image');
+        $imageName = $image->getClientOriginalName();
+        $destination = public_path('/images');
+        $image->move($destination, $imageName);
         $book = new Book();
         $book->title = $request->title;
         $book->author = $request->author;
+        $book->pic = $imageName;
         $book->category_id = $request->category_id;
         $book->price = $request->price;
         $book->no_copies = $request->no_copies;
@@ -92,7 +98,7 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         $categories = Category::pluck('name', 'id');
-        return view('admin.editBook', ['book' => $book,'categories' => $categories]);
+        return view('admin.editBook', ['book' => $book, 'categories' => $categories]);
     }
 
     /**
@@ -107,12 +113,18 @@ class BookController extends Controller
         $request->validate([
             'title' => "required|string|unique:books,title,{$id},id,deleted_at,NULL",
             'author' => 'required|string',
+            'image' => "required|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             'price' => 'required|numeric',
             'no_copies' => 'required|numeric'
         ]);
+        $image = $request->file('image');
+        $imageName = $image->getClientOriginalName();
+        $destination = public_path('/images');
+        $image->move($destination, $imageName);
         $book = Book::find($id);
         $book->title = $request->title;
         $book->author = $request->author;
+        $book->pic = $imageName;
         $book->category_id = $request->category_id;
         $book->price = $request->price;
         $book->no_copies = $request->no_copies;

@@ -46,7 +46,7 @@
             <div class="col-sm-4 col-lg-4 col-md-4"  class="column {{$book->category_id}}">
                 <div class="thumbnail">
                 <!-- http://placehold.it/320x150 -->
-                    <img src="{{$book ->pic}}" alt="{{$book -> title}}">
+                    <img src="{{ URL::to('/images') }}/{{$book->pic}}" alt="{{$book -> title}}">
                     <div class="caption">  
                         <h4 class="pull-right">${{$book -> price}}</h4>
                         <h4><a href="{{url('book').'/'.$book->id}}">{{$book -> title}}</a>
