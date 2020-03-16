@@ -14,7 +14,6 @@ class CreateLeasesTable extends Migration
     public function up()
     {
         Schema::create('leases', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('book_id');
             //number of days
@@ -25,6 +24,7 @@ class CreateLeasesTable extends Migration
             $table->foreign('book_id')
                   ->references('id')->on('books')
                   ->onDelete('cascade');
+            $table->primary(['user_id', 'book_id']);
             $table->timestamps();
         });
     }
