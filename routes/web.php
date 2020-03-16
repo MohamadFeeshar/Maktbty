@@ -27,6 +27,8 @@ Auth::routes();
 //     return view('admin.dashboard');
 // });
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/favorites', 'FavoriteController@index')->middleware('auth');
+Route::get('/myBooks', 'LeaseController@index')->middleware('auth');
 Route::get('/dashboard', 'AdminController@admin')->middleware('auth')->middleware('is_admin')->name('admin');
 Route::resource('users', 'UserController')->middleware('auth');
 Route::resource('admins', 'AdminController')->middleware('auth');
