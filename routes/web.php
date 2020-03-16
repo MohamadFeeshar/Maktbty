@@ -19,40 +19,33 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
-// Route::get('/admin', 'AdminController@admin')->middleware('is_admin')->name('admin');
-
-
-// Route::get('/dashboard', function () {
-//     return view('admin.dashboard');
-// });
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-Route::get('/favorites', 'FavoriteController@index')->middleware('auth');
-Route::get('/myBooks', 'LeaseController@index')->middleware('auth');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth')->middleware('is_user');
+Route::get('/favorites', 'FavoriteController@index')->middleware('auth')->middleware('is_user');
+Route::get('/myBooks', 'LeaseController@index')->middleware('auth')->middleware('is_user');
 Route::get('/dashboard', 'AdminController@admin')->middleware('auth')->middleware('is_admin')->name('admin');
 Route::resource('users', 'UserController')->middleware('auth')->middleware('is_admin');
 Route::resource('admins', 'AdminController')->middleware('auth')->middleware('is_admin');
 Route::resource('books', 'BookController')->middleware('auth')->middleware('is_admin');
 Route::resource('categories', 'CategoryController')->middleware('auth')->middleware('is_admin');
-Route::resource('comments','CommentController')->middleware('auth');
-Route::get('/edit', 'CommentController@edit')->middleware('auth');
+Route::resource('comments','CommentController')->middleware('auth')->middleware('is_user');
+Route::get('/edit', 'CommentController@edit')->middleware('auth')->middleware('is_user');
 
-Route::resource('lease','LeaseController')->middleware('auth');
+Route::resource('lease','LeaseController')->middleware('auth')->middleware('is_user');
 Route::get('/dashboard/users', 'UserController@index')->middleware('auth')->middleware('is_admin');
 Route::get('/dashboard/editUser', 'UserController@edit')->middleware('auth')->middleware('is_admin');
 Route::get('users', 'UserController@ban')->name('users.ban')->middleware('auth')->middleware('is_admin');
 
-Route::get('/dashboard/categories', 'CategoryController@index')->middleware('is_admin');
+Route::get('/dashboard/categories', 'CategoryController@index')->middleware('is_admin')->middleware('auth');
 
-Route::get('/dashboard/books', 'BookController@index')->middleware('is_admin');
+Route::get('/dashboard/books', 'BookController@index')->middleware('is_admin')->middleware('auth');
 
 
-Route::get('/dashboard/admins', 'AdminController@index')->middleware('auth');
-Route::get('/dashboard/editAdmin', 'AdminController@edit')->middleware('auth');
+Route::get('/dashboard/admins', 'AdminController@index')->middleware('auth')->middleware('is_admin');
+Route::get('/dashboard/editAdmin', 'AdminController@edit')->middleware('auth')->middleware('is_admin');
 
-Route::get('book/{book}', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');
+Route::get('book/{book}', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth')->middleware('is_user');
 
-Route::get('/book', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth');
-Route ::get('/category','HomeController@category')->name('category');
-Route ::get('/order','HomeController@order')->name('order');
-Route ::get('/favourite','FavoriteController@store')->name('favourite');
+Route::get('/book', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth')->middleware('is_user');
+Route::get('/category', 'HomeController@category')->name('category')->middleware('is_user');
+Route::get('/order', 'HomeController@order')->name('order')->middleware('is_user');
+Route::get('/favourite', 'FavoriteController@store')->name('favourite')->middleware('is_user');

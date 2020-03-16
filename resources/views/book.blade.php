@@ -3,7 +3,6 @@
 
 @section('content')
 
-<body>
   
     <section class="product-sec">
         <div class="container">
@@ -101,7 +100,7 @@
                               <img src="http://lorempixel.com/40/40/people/1/">
                             </a>
                             <div class="media-body">    
-                              <h4 class="media-heading user_name">User Name</h4>
+                              <h4 class="media-heading user_name">User no.{{$comment->user_id}}</h4>
                               <small class="pull-right">{{$comment->created_at}}</small>
                               <p>{{$comment->content}}</p>
                               <p>{{$comment->rate}}</p>
@@ -147,6 +146,8 @@
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/rating.js"></script>
+
+
 
 
 @endsection
