@@ -8,6 +8,7 @@ use App\User;
 use App\Lease;
 use Auth;
 
+
 class LeaseController extends Controller
 {
     /**
@@ -20,6 +21,7 @@ class LeaseController extends Controller
         $userId = Auth::id();
         $books = DB::table('books')->rightJoin('leases', 'books.id', '=', 'leases.book_id', 'leases.user_id', '=', $userId)->get();
         return view('user.myBooks')->with(['books'=>$books]);
+        //
     }
 
     /**
@@ -41,6 +43,15 @@ class LeaseController extends Controller
     public function store(Request $request)
     {
         //
+        // echo ($request->book_id);
+        // var_dump($request->duration);
+        // die();
+        $lease = new Lease();
+        $lease->user_id = Auth::id();
+        $lease->book_id = $request->book_id;
+        $lease->duration = $request->duration;
+        $lease->save();
+        return redirect()->route('books.getdetails');
     }
 
     /**
@@ -75,6 +86,7 @@ class LeaseController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Lease;
 use App\User;
 use Auth;
 
@@ -22,8 +23,18 @@ class AdminController extends Controller
 
     public function admin()
     {
-        // return view('admin');
-        return view('admin.dashboard');
+        $previous_week = strtotime("-1 week +1 day");
+        $start_week = strtotime("last sunday midnight", $previous_week);
+        $end_week = strtotime("next saturday", $start_week);
+        $start_week = date("Y-m-d", $start_week);
+        $end_week = date("Y-m-d", $end_week);
+        $lastWeekLease=Lease::select(Lease::raw('SUM(price*duration) AS profit,DATE(leases.created_at) as date'))
+                            ->join('books','books.id','=','book_id')
+                            ->whereBetween('leases.created_at', [$start_week, $end_week])
+                            ->orderBy('date', 'asc')
+                            ->groupBy('date')
+                            ->get();
+        return view('admin.dashboard',['profit'=>$lastWeekLease]);
     }
 
     public function index()
@@ -52,9 +63,9 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:50|unique:users',
-            'email' => 'required|string|email|unique:users',
-            'phone' => 'required|digits:11|unique:users',
+            'username' => 'required|string|max:50|unique:users,username,NULL,id,deleted_at,NULL',
+            'email' => 'required|string|email|unique:users,email,NULL,id,deleted_at,NULL',
+            'phone' => 'required|digits:11|unique:users,phone,NULL,id,deleted_at,NULL',
             'address' => 'required|string',
             'password' => 'required|string|min:8'
 
@@ -104,9 +115,9 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'username' => 'required|string|max:50|unique:users',
-            'email' => 'required|string|email|unique:users',
-            'phone' => 'required|digits:11|unique:users',
+            'username' => 'required|string|max:50|unique:users,username,' . $id,
+            'email' => 'required|string|email|unique:users,email,' . $id,
+            'phone' => 'required|digits:11|unique:users,phone,' . $id,
             'address' => 'required|string',
             'password' => 'required|string|min:8'
 

@@ -34,14 +34,25 @@ class HomeController extends Controller
         'book_data'=>$bookData
         ,compact('bookData')
         ]);
-       
-       if(!$searchTerm)
-       {
-         $bookData = \App\Book::orderBy('created_at', 'DESC')->paginate(3);
-       
-         return view('home', ['list_category' => $list, 
-         'book_data'=>$bookData ]);
-       }
+ 
     }
-      
+    public function category(Request $request)
+    {
+        $list = \App\Category::all();
+
+        $categoryItems = $request->input('categoryTerm');
+        $bookData = \App\Book::where('category_id', 'like','%' .$categoryItems. '%')->orderBy('created_at', 'DESC')->paginate(3);
+
+        return view ('bookcategory',['list_category' => $list, 'book_data'=>$bookData
+        ]);
+    }
+    public function order(Request $request)
+    {
+        $list = \App\Category::all();
+        $order = $request->input('order');
+        $bookData = \App\Book::orderBy($order, 'DESC')->paginate(3);
+        // dd($order);
+        return view ('orderBooks',['list_category' => $list, 'book_data'=>$bookData
+        ]);
+    }
 }
