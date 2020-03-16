@@ -10,7 +10,7 @@ Dashboard
 <div id="editEmployeeModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            {{ Form::model($book, ['route' => ['books.update', $book->id], 'method' => 'put']) }}
+            {{ Form::model($book, ['route' => ['books.update', $book->id], 'method' => 'put', 'enctype' => "multipart/form-data"]) }}
             <div class="modal-header">
                 <h4 class="modal-title">Edit Book</h4>
             </div>
@@ -26,10 +26,16 @@ Dashboard
                     <label>author</label>
                     {!! Form::text('author', $value = null, ['class' => 'form-control']) !!}
                 </div>
+                <div>
+                    <label>Cover Image</label>
+                    {{ Form::file('image', ['class' => 'form-control']) }}
+                    @error('image')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
                 <div class="form-group">
                     <label>Category</label>
                     {!! Form::select('category_id',$categories, null, ['class' => 'form-control']) !!}
-                    <!-- {!! Form::text('category_id', $value = null, ['class' => 'form-control']) !!} -->
                 </div>
                 <div class="form-group">
                     <label>Price</label>

@@ -49,6 +49,7 @@ Dashboard
             </th>
             <th>Title</th>
             <th>Author</th>
+            <th>Image</th>
             <th>Category</th>
             <th>Price</th>
             <th>Copies</th>
@@ -66,6 +67,8 @@ Dashboard
             </td>
             <td>{{ $book->title }}</td>
             <td>{{ $book->author }}</td>
+            <td>
+            <img src="{{ URL::to('/images') }}/{{$book->pic}}" alt="No image" height="80" width="60"></td>
             <td>{{ $book->category->name }}</td>
             <td>{{ $book->price }}</td>
             <td>{{ $book->no_copies }}</td>
@@ -99,10 +102,9 @@ Dashboard
               <label>Author</label>
               <input name="author" type="text" class="form-control" required>
             </div>
-            <div class="form-group">
+            <div>
               <label>Cover Image</label>
-              {{ Form::file('image') }}
-              <input name="image" type="file" class="form-control" required>
+              <input name="image" type="file" class="form-control" >
             </div>
             <div class="form-group">
               <label>Category</label>

@@ -12,12 +12,12 @@
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   @stack('table-styles')
+  @stack('chart')
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <!-- CSS Files -->
   <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/css/now-ui-dashboard.css?v=1.5.0') }}" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{ asset('assets/demo/demo.css') }}" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
@@ -27,11 +27,10 @@
   <div class="wrapper ">
 
     <div class="sidebar" data-color="blue">
-      <!--Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"-->
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item dropdown">
-            <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <a style="color:white;background-color:#141E30;font-size: 0.8571em" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{ Auth::user()->name }} <span class="caret"></span>
             </a>
 
@@ -87,6 +86,8 @@
 
 
       <div class="panel-header panel-header-sm">
+        <h1 style="color:white;">Maktabty</h1>
+        <h3 style="color:white;">Admin dashboard</h3>
       </div>
 
       <div class="content">

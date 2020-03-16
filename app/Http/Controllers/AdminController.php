@@ -23,14 +23,10 @@ class AdminController extends Controller
 
     public function admin()
     {
-        $previous_week = strtotime("-1 week +1 day");
-        $start_week = strtotime("last sunday midnight", $previous_week);
-        $end_week = strtotime("next saturday", $start_week);
-        $start_week = date("Y-m-d", $start_week);
-        $end_week = date("Y-m-d", $end_week);
+        $date = \Carbon\Carbon::today()->subDays(7);
         $lastWeekLease=Lease::select(Lease::raw('SUM(price*duration) AS profit,DATE(leases.created_at) as date'))
                             ->join('books','books.id','=','book_id')
-                            ->whereBetween('leases.created_at', [$start_week, $end_week])
+                            ->whereBetween('leases.created_at', [$date, today()])
                             ->orderBy('date', 'asc')
                             ->groupBy('date')
                             ->get();
