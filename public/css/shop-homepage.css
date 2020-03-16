@@ -1,23 +1,23 @@
-body {
+/* body {
   padding-top: 70px
-}
+} */
 
 .slide-image {
   width: 100%;
 }
 
-.carousel-holder {
+/* .carousel-holder {
   margin-bottom: 30px;
-}
+} */
 
-.carousel-control,.item {
+/* .carousel-control,.item {
   border-radius: 4px;
 }
 
 .caption {
   height: 130px;
   overflow: hidden;
-}
+} */
 
 .caption h4 {
   white-space: nowrap;
