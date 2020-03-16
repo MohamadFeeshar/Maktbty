@@ -78,7 +78,11 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $comment = Comment::find($id);
+        $comment->content = $request->comment;
+        $comment->save();
+        return back()->withInput();
+        // return view('books.getdetails', ['id' => $id]);
     }
 
     /**

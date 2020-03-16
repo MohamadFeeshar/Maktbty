@@ -104,7 +104,7 @@
                               <small class="pull-right">{{$comment->created_at}}</small>
                               <p>{{$comment->content}}</p>
                               <p>{{$comment->rate}}</p>
-                            <!-- <a href="/book/{{$book->id}}/edit" class="btn btn-primary">update</a> -->
+                            {{-- <!-- <a href="/book/{{$book->id}}/edit" class="btn btn-primary">update</a> --> --}}
                             <a href="{{url('comments').'/'.$comment->id.'/edit'}}" class="btn btn-primary">update</a>
                             
                             </div>
