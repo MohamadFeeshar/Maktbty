@@ -42,16 +42,18 @@ class LeaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // echo ($request->book_id);
-        // var_dump($request->duration);
+        // dd( Auth::id());
         // die();
         $lease = new Lease();
         $lease->user_id = Auth::id();
         $lease->book_id = $request->book_id;
         $lease->duration = $request->duration;
         $lease->save();
-        return redirect()->route('books.getdetails');
+        return back()->withInput();
+        // return redirect()->route('/book', ['id' => $request->book_id]);
+        // return view('books.getdetails', ['id' => $id]);
+        // return view('books.getdetails', ['id' => $id]);
+        // return redirect()->route('books.getdetails', ['id' => $id]);
     }
 
     /**

@@ -37,17 +37,12 @@ class CommentController extends Controller
     {
 
         $comment = new Comment();
-        
-        // var_dump(Auth::id());
-        // die();
         $comment->user_id = Auth::id();
         $comment->book_id = $request->book_id;
         $comment->content = $request->comment;
         $comment->rate = 4;
         $comment->save();
         return back()->withInput();
-        // return redirect()->route('books.getdetails', ['id' => Auth::id() ]);
-        // return redirect()->route('books.getdetails');
     }
 
     /**
@@ -83,7 +78,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

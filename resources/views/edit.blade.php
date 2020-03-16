@@ -8,6 +8,10 @@
     {{!! Form::textarea('comment',$comment->content) !!}}
 </div>
     {{!! Form::hidden('_method','PUT')!!}}
-    {{!! Form::submit('Submit',['class'=>'btn btn-primary'])}}
+    {{!! Form::submit('Submit',['class'=>'btn btn-primary'])!!}}
 {!! Form::close() !!}
 @endsection
+
+
+<h1></h1>
+
