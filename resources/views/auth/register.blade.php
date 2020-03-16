@@ -1,83 +1,147 @@
-@extends('layouts.app')
-@push('css-styles')
-<link href="{{ asset('css/login.css') }}" rel="stylesheet">
-@endpush
-@section('content')
-<div class="login-wrap">
-    <div class="login-html">
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign Up</label>
-            <input id="tab-2" type="radio" name="tab" disabled class="for-pwd"><label for="tab-2" class="tab">Maktabty</label>
-            <div class="login-form">
-                <div class="sign-in-htm">
-                    <div class="group">
-                        <label for="name" class="label">Full Name</label>
-                        <input id="name" name="name" type="text" class="input" required autocomplete="name" autofocus>
-                        @error('name')
-                        <div class="alert alert-danger">
+<!DOCTYPE html>
+<html lang="en">
 
-                            <strong>{{ $message }}</strong>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <style>
+        .full-height {
+            height: 100vh;
+        }
+
+        .position-ref {
+            position: relative;
+        }
+
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 84px;
+        }
+
+        .links>a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .m-b-md {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-center position-ref full-height">
+        @if (Route::has('login'))
+        <div class="top-right links">
+            @auth
+            <a href="{{ url('/home') }}">Home</a>
+            @else
+            <a href="{{ route('login') }}">Login</a>
+
+            @if (Route::has('register'))
+            <a href="{{ route('register') }}">Register</a>
+            @endif
+            @endauth
+        </div>
+        @endif
+        <div class="login-wrap">
+            <div class="login-html">
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign Up</label>
+                    <input id="tab-2" type="radio" name="tab" disabled class="for-pwd"><label for="tab-2" class="tab">Maktabty</label>
+                    <div class="login-form">
+                        <div class="sign-in-htm">
+                            <div class="group">
+                                <label for="name" class="label">Full Name</label>
+                                <input id="name" name="name" type="text" class="input" required autocomplete="name" autofocus>
+                                @error('name')
+                                <div class="alert alert-danger">
+
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="group">
+                                <label for="username" class="label">Username</label>
+                                <input id="username" name="username" type="text" class="input" required autocomplete="username">
+                                @error('username')
+                                <div class="alert alert-danger">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="group">
+                                <label for="email" class="label">E-mail</label>
+                                <input id="email" name="email" type="text" class="input" required autocomplete="email">
+                                @error('email')
+                                <div class="alert alert-danger">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="group">
+                                <label for="phone" class="label">Phone</label>
+                                <input id="phone" name="phone" type="text" class="input" required>
+                                @error('phone')
+                                <div class="alert alert-danger">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="group">
+                                <label for="address" class="label">Address</label>
+                                <input id="address" name="address" type="text" class="input" required autocomplete="address">
+                                @error('address')
+                                <div class="alert alert-danger">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="group">
+                                <label for="password" class="label">Password</label>
+                                <input id="password" name="password" type="password" class="input" data-type="password" required>
+                                @error('password')
+                                <div class="alert alert-danger">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="group">
+                                <label for="password-confirm" class="label">Confirm Password</label>
+                                <input id="password-confirm" name="password_confirmation" type="password" class="input" data-type="password" required>
+                            </div>
+                            <div class="group">
+                                <input type="submit" class="button" value="Sign Up">
+                            </div>
+                            <div class="hr"></div>
                         </div>
-                        @enderror
                     </div>
-                    <div class="group">
-                        <label for="username" class="label">Username</label>
-                        <input id="username" name="username" type="text" class="input" required autocomplete="username">
-                        @error('username')
-                        <div class="alert alert-danger">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="group">
-                        <label for="email" class="label">E-mail</label>
-                        <input id="email" name="email" type="text" class="input" required autocomplete="email">
-                        @error('email')
-                        <div class="alert alert-danger">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="group">
-                        <label for="phone" class="label">Phone</label>
-                        <input id="phone" name="phone" type="text" class="input" required>
-                        @error('phone')
-                        <div class="alert alert-danger">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="group">
-                        <label for="address" class="label">Address</label>
-                        <input id="address" name="address" type="text" class="input" required autocomplete="address">
-                        @error('address')
-                        <div class="alert alert-danger">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="group">
-                        <label for="password" class="label">Password</label>
-                        <input id="password" name="password" type="password" class="input" data-type="password" required>
-                        @error('password')
-                        <div class="alert alert-danger">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="group">
-                        <label for="password-confirm" class="label">Confirm Password</label>
-                        <input id="password-confirm" name="password_confirmation" type="password" class="input" data-type="password" required>
-                    </div>
-                    <div class="group">
-                        <input type="submit" class="button" value="Sign Up">
-                    </div>
-                    <div class="hr"></div>
-                </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
+</body>
+
+</html>
+@section('content')
 
 @endsection

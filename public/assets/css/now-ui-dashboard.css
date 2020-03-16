@@ -4212,6 +4212,10 @@ Created using IcoMoon - icomoon.io
   background: linear-gradient(to right, #0c2646 0%, #204065 60%, #2a5788 100%);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .panel-header .header .title {
