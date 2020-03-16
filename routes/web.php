@@ -28,15 +28,15 @@ Auth::routes();
 // });
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/dashboard', 'AdminController@admin')->middleware('auth')->middleware('is_admin')->name('admin');
-Route::resource('users', 'UserController')->middleware('auth');
-Route::resource('admins', 'AdminController')->middleware('auth');
-Route::resource('books', 'BookController')->middleware('auth');
-Route::resource('categories', 'CategoryController')->middleware('auth');
+Route::resource('users', 'UserController')->middleware('auth')->middleware('is_admin');
+Route::resource('admins', 'AdminController')->middleware('auth')->middleware('is_admin');
+Route::resource('books', 'BookController')->middleware('auth')->middleware('is_admin');
+Route::resource('categories', 'CategoryController')->middleware('auth')->middleware('is_admin');
 Route::resource('comments','CommentController')->middleware('auth');
 Route::resource('lease','LeaseController')->middleware('auth');
 Route::get('/dashboard/users', 'UserController@index')->middleware('auth')->middleware('is_admin');
 Route::get('/dashboard/editUser', 'UserController@edit')->middleware('auth')->middleware('is_admin');
-Route::get('users', 'UserController@ban')->name('users.ban');
+Route::get('users', 'UserController@ban')->name('users.ban')->middleware('auth')->middleware('is_admin');
 
 Route::get('/dashboard/categories', 'CategoryController@index')->middleware('is_admin');
 

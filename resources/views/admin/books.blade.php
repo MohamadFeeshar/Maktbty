@@ -85,7 +85,7 @@ Dashboard
     <div id="addEmployeeModal" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
-          {!! Form::open(['route' => 'books.store','method' => 'post']) !!}
+          {!! Form::open(['route' => 'books.store','method' => 'post', 'enctype' => "multipart/form-data"]) !!}
           <div class="modal-header">
             <h4 class="modal-title">Add Book</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -100,8 +100,12 @@ Dashboard
               <input name="author" type="text" class="form-control" required>
             </div>
             <div class="form-group">
+              <label>Cover Image</label>
+              {{ Form::file('image') }}
+              <input name="image" type="file" class="form-control" required>
+            </div>
+            <div class="form-group">
               <label>Category</label>
-              <!-- <input name="category_id" type="text" class="form-control" required> -->
               <select class="form-control" name="category_id">
                 @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
