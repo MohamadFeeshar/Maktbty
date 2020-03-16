@@ -27,8 +27,10 @@ Route::resource('users', 'UserController')->middleware('auth')->middleware('is_a
 Route::resource('admins', 'AdminController')->middleware('auth')->middleware('is_admin');
 Route::resource('books', 'BookController')->middleware('auth')->middleware('is_admin');
 Route::resource('categories', 'CategoryController')->middleware('auth')->middleware('is_admin');
-Route::resource('comments', 'CommentController')->middleware('auth')->middleware('is_user');
-Route::resource('lease', 'LeaseController')->middleware('auth')->middleware('is_user');
+Route::resource('comments','CommentController')->middleware('auth')->middleware('is_user');
+Route::get('/edit', 'CommentController@edit')->middleware('auth')->middleware('is_user');
+
+Route::resource('lease','LeaseController')->middleware('auth')->middleware('is_user');
 Route::get('/dashboard/users', 'UserController@index')->middleware('auth')->middleware('is_admin');
 Route::get('/dashboard/editUser', 'UserController@edit')->middleware('auth')->middleware('is_admin');
 Route::get('users', 'UserController@ban')->name('users.ban')->middleware('auth')->middleware('is_admin');

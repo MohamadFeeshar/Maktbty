@@ -128,9 +128,10 @@
                             </a>
                             <div class="media-body">    
                               <h4 class="media-heading user_name">User Name</h4>
-                              <small class="pull-right">1h ago</small>
+                              <small class="pull-right">{{$comment->created_at}}</small>
                               <p>{{$comment->content}}</p>
                               <p>{{$comment->rate}}</p>
+                            <a href="/book/{{$book->id}}/edit" class="btn btn-primary">update</a>
                             </div>
                           </div>
                           @endforeach
