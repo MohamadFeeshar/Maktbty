@@ -54,6 +54,15 @@
                         </h4>
                         <p> {{$book->summary}} , book pages are {{$book -> page_count}}, author is {{$book -> author}}<a target="_blank" href="http://www.bootsnipp.com">See more</a>.</p>
                        <div> available copies :{{$book -> no_copies}}</div>
+                       <form action="{{ route('favourite') }}" method="GET">
+                            {{csrf_field()}}
+                                <div class="input-group">
+                                    <input type="hidden" class="form-control" name="favouriteTerm" value="{{ isset($book->id) ? $book->id : '' }}">
+                                  <button type="submit">
+                                    <i class="fas fa-heart"style="font-size: 300%;content: '\f004';" id="fav" onclick="{this.style.color = 'red'}"></i>
+                                </button>
+                                </div>
+                       </form>
                     </div>
                     <div class="ratings">
                         <p class="pull-right">15 reviews</p>
