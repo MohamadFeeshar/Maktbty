@@ -94,6 +94,8 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id)->delete();
+        return back()->withInput();
+        // return redirect(url('book', $comment->book_id));
     }
 }
