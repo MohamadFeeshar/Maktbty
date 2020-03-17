@@ -32,7 +32,7 @@
                           <label for="exampleInputEmail1">Review</label>
                           {!! Form::open(['route' => 'comments.store','method' => 'POST' , 'book_id' => $book->id]) !!}
                           <textarea class="form-control" id="exampleFormControlTextarea1" name='comment' rows="3" placeholder="add comment here"></textarea>
-                          <button type='submit' class="btn">Comment</button>
+                          <button type='submit' class="btn btn-primary">Comment</button>
                           <input type="hidden" name="book_id" value="{{$book->id}}">
                           {!! Form::close() !!}
                         </div>
@@ -104,8 +104,8 @@
                               <small class="pull-right">{{$comment->created_at}}</small>
                               <p>{{$comment->content}}</p>
                               <p>{{$comment->rate}}</p>
-                            <!-- <a href="/book/{{$book->id}}/edit" class="btn btn-primary">update</a> -->
-                            <a href="{{url('comments').'/'.$comment->id.'/edit'}}" class="btn btn-primary">update</a>
+                            {{-- <!-- <a href="/book/{{$book->id}}/edit" class="btn btn-primary">update</a> --> --}}
+                            <a href="{{url('comments').'/'.$comment->id.'/edit'}}" value="{{$book->id}}" class="btn btn-primary">update</a>
                             
                             </div>
                           </div>

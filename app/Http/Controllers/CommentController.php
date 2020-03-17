@@ -78,7 +78,12 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $comment = Comment::find($id);
+        $comment->content = $request->comment;
+        $comment->book_id;
+        $comment->save();
+        return redirect(url('book', $comment->book_id));
+        // return view('books.getdetails', ['id' => $id]);
     }
 
     /**
