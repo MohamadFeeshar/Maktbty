@@ -106,7 +106,10 @@
                               <p>{{$comment->rate}}</p>
                             {{-- <!-- <a href="/book/{{$book->id}}/edit" class="btn btn-primary">update</a> --> --}}
                             <a href="{{url('comments').'/'.$comment->id.'/edit'}}" value="{{$book->id}}" class="btn btn-primary">update</a>
-                            
+                            {!! Form::open(['route'=>['comments.destroy',$comment->id],'method' => 'DELETE']) !!}
+                            <button type='submit' class='btn btn-danger'>delete</button>
+                            {!! Form::close() !!}
+
                             </div>
                           </div>
                           @endforeach
