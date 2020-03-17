@@ -80,8 +80,9 @@ class CommentController extends Controller
     {
         $comment = Comment::find($id);
         $comment->content = $request->comment;
+        $comment->book_id;
         $comment->save();
-        return back()->withInput();
+        return redirect()->route('books.getdetails',$comment->book_id);
         // return view('books.getdetails', ['id' => $id]);
     }
 
