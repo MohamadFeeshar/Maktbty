@@ -47,6 +47,8 @@ class LeaseController extends Controller
         $lease = new Lease();
         $lease->user_id = Auth::id();
         $lease->book_id = $request->book_id;
+        $copies = DB::table('books')->join('leases', 'books.id', '=', 'leases.book_id')->decrement('no_copies', 1);
+
         $lease->duration = $request->duration;
         $lease->save();
         return back()->withInput();

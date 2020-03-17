@@ -57,8 +57,15 @@
                                 </div>
 
                      <!-- End Rate -->
+                     
+    
+
                       <p>Avaliable Copies: {{$book->no_copies}}</p>
+                      {{-- @if (count($book->no_copies) > 0) --}}
                       <a href="#leaseBook" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Lease</span></a>
+                      {{-- @else --}}
+                      {{-- <input type="button" value="" disabled>
+                      @endif --}}
                     </div>
                     
                 </div>
