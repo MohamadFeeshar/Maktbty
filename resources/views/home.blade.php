@@ -5,14 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <!-- <div class="card-header">Dashboard</div> -->
-
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+             
 
 <div class="container">
 
@@ -52,7 +46,7 @@
                         <h4><a href="{{url('book').'/'.$book->id}}">{{$book -> title}}</a>
                         
                         </h4>
-                        <p> {{$book->summary}} , book pages are {{$book -> page_count}}, author is {{$book -> author}}<a target="_blank" href="http://www.bootsnipp.com">See more</a>.</p>
+                        <p> {{$book->summary}} , book pages are {{$book -> page_count}}, author is {{$book -> author}}<a target="_blank" href="{{url('book').'/'.$book->id}}">See more</a>.</p>
                        <div> available copies :{{$book -> no_copies}}</div>
                        <form action="{{ route('favourite') }}" method="GET">
                             {{csrf_field()}}

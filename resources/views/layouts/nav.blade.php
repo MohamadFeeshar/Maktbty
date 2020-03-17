@@ -6,10 +6,10 @@
         <a class="nav-link" href="{{route('home')}}">Maktbty <span class="sr-only">(current)</span></a>
    </li>
    <li class="navbar-brand">
-        <a class="nav-link" href="#">MyBooks <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{route('myBooks')}}">MyBooks <span class="sr-only">(current)</span></a>
    </li>
    <li class="navbar-brand">
-        <a class="nav-link" href="#">Favourites <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{route('fav')}}">Favourites <span class="sr-only">(current)</span></a>
    </li>
 </ul>
 
