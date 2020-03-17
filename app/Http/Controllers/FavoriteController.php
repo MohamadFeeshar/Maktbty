@@ -18,9 +18,8 @@ class FavoriteController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        //$favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
-        $books = DB::table('books')->rightJoin('favorites', 'books.id', '=', 'favorites.book_id', 'favorites.user_id', '=', $userId)->get();
-        //return dd(gettype($books));
+        $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
+        $books = DB::table('books')->whereIn('id', $favorites)->get();
         return view('user.favorites')->with(['books'=>$books]);
     }
 

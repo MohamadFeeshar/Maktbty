@@ -19,9 +19,10 @@ class LeaseController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $books = DB::table('books')->rightJoin('leases', 'books.id', '=', 'leases.book_id', 'leases.user_id', '=', $userId)->get();
+        // $books = DB::table('books')->rightJoin('leases', 'books.id', '=', 'leases.book_id', 'leases.user_id', '=', $userId)->get();
+        $leases = DB::table('leases')->where('user_id', $userId)->pluck('book_id');
+        $books = DB::table('books')->whereIn('id', $leases)->get();
         return view('user.myBooks')->with(['books'=>$books]);
-        //
     }
 
     /**
