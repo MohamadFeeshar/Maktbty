@@ -82,7 +82,7 @@ class CommentController extends Controller
         $comment->content = $request->comment;
         $comment->book_id;
         $comment->save();
-        return redirect()->route('books.getdetails',$comment->book_id);
+        return redirect(url('book', $comment->book_id));
         // return view('books.getdetails', ['id' => $id]);
     }
 
