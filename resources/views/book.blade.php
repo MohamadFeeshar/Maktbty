@@ -105,9 +105,13 @@
                               <p>{{$comment->content}}</p>
                               <p>{{$comment->rate}}</p>
                             {{-- <!-- <a href="/book/{{$book->id}}/edit" class="btn btn-primary">update</a> --> --}}
+                            @can('update',$comment)
                             <a href="{{url('comments').'/'.$comment->id.'/edit'}}" value="{{$book->id}}" class="btn btn-primary">update</a>
+                            @endcan
                             {!! Form::open(['route'=>['comments.destroy',$comment->id],'method' => 'DELETE']) !!}
+                            @can('delete',$comment)
                             <button type='submit' class='btn btn-danger'>delete</button>
+                            @endcan
                             {!! Form::close() !!}
 
                             </div>
