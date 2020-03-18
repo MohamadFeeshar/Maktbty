@@ -8,8 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="{{ asset('js/jquery-1.10.2.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -20,11 +20,11 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
   <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="fontawesome-free-5.12.1-web/css/all.css">
 
 <!-- Add custom CSS here -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/user.css') }}" rel="stylesheet">
