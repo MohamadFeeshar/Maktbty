@@ -26,13 +26,14 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $userId=Auth::user();
+        $userId=Auth::id();
         $list = \App\Category::all();
         $searchTerm = $request->input('searchTerm');
         $bookData = \App\Book::search($searchTerm)->orderBy('price', 'DESC')->paginate(3);
         $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
         return view('home', ['list_category' => $list, 
-        'book_data'=>$bookData
+        'book_data'=>$bookData,
+        'favorites'=>$favorites
         ,compact('bookData')
         ]);
  
