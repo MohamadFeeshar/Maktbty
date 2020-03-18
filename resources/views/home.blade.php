@@ -19,26 +19,13 @@
 <div class="row">
   <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
-      @foreach($list_category as $category)  
-      <div class="container">
-          <div class="col-sm-8">
-            <form action="{{ route('category') }}" method="GET">
-            {{csrf_field()}}
-                 <div class="input-group">
-                    <input type="hidden" class="form-control" name="categoryTerm"value="{{ isset($category->id) ? $category->id : '' }}">
-                     <span class="input-group-btn">
-                            <button class="btn btn-secondary" style="width:70px;" type="submit">{{ $category->name }}</button>
-                        </span> 
-                 </div>
-            </form>
-          </div>
-     </div>
-       @endforeach
- 
- 
+        @foreach($list_category as $category)  
+            <div class="container">
+            <li class="category"><a href="/category/{{$category->id}}">{{$category->name}}</a></li>
+            </div>
+        @endforeach
       </div>
     </div>
-  
     <div class="col-md-9">
         <div class="row">
 

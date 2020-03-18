@@ -27,6 +27,7 @@ Route::resource('users', 'UserController')->middleware('auth')->middleware('is_a
 Route::resource('admins', 'AdminController')->middleware('auth')->middleware('is_admin');
 Route::resource('books', 'BookController')->middleware('auth')->middleware('is_admin');
 Route::resource('categories', 'CategoryController')->middleware('auth')->middleware('is_admin');
+Route::get('/category/{id}', 'CategoryUserController@show')->middleware('auth')->middleware('is_user');
 Route::resource('comments','CommentController')->middleware('auth')->middleware('is_user');
 Route::get('/edit', 'CommentController@edit')->middleware('auth')->middleware('is_user');
 

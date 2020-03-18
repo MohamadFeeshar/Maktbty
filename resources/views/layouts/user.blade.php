@@ -12,6 +12,8 @@
     <script src="js/bootstrap.js"></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/ajaxRequests.js') }}"></script>
+
 
     <!-- book style -->
     <link rel="stylesheet" href="css/book.css">
@@ -21,20 +23,18 @@
 
   <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="fontawesome-free-5.12.1-web/css/all.css">
 
 <!-- Add custom CSS here -->
     <link href="css/shop-homepage.css" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/user.css') }}" rel="stylesheet">
     @stack('css-styles')
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('home') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -58,19 +58,11 @@
                         <div class="container">
                         
                         <span> Order By</span>
-                        <div class="col-sm-8">
-                                    <form action="order" method="GET">
-                                        {{csrf_field()}}
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                            <button type="submit" name="order" class="btn btn-secondary"value="created_at">Latest</button>
-                                            <button class="btn btn-secondary" name="order" type="submit" value="price">Price</button>
-
-                                            </span>
-                                        </div>
-                                    </form>
-                                </div>
-                              
+                         <span class="input-group-btn" name="orderBy">
+                                <button type="submit" name="latest" class="btn btn-secondary">Latest</button>
+                                <button class="btn btn-secondary" name="price" type="submit" >Price</button>
+                        </span>                        
+                        
                         </div>
                             <div class="container">
                                 <div class="col-sm-8">
@@ -118,7 +110,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="container">
             @yield('content')
         </main>
     </div>
