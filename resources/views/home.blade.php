@@ -27,14 +27,12 @@
             <div class="col-sm-4 col-lg-4 col-md-4"  class="column {{$book->category_id}}">
                 <div class="thumbnail">
                 <!-- http://placehold.it/320x150 -->
-                    <img src="{{ URL::to('/images') }}/{{$book->pic}}" alt="{{$book -> title}}">
+                <img src="{{ URL::to('/images') }}/{{$book->pic}}" alt="{{$book -> title}}">
                     <div class="caption">  
                         <h4 class="pull-right">${{$book -> price}}</h4>
-                        <h4><a href="{{url('book').'/'.$book->id}}">{{$book -> title}}</a>
-                        
-                        </h4>
-                        <p> {{$book->summary}} , book pages are {{$book -> page_count}}, author is {{$book -> author}}<a target="_blank" href="{{url('book').'/'.$book->id}}">See more</a>.</p>
-                       <div> available copies :{{$book -> no_copies}}</div>
+                        <h4><a href="{{url('book').'/'.$book->id}}">{{$book -> title}}</a></h4>
+                        <h5>  author is {{$book -> author}}. book pages are {{$book -> page_count}},{{mb_strimwidth($book->summary, 0, 15,"...")}}<a target="_blank" href="{{url('book').'/'.$book->id}}">See more</a>.</h5>
+                        <h5> available copies :{{$book -> no_copies}}</h5>
                        <form action="{{ route('favourite') }}" method="GET">
                             {{csrf_field()}}
                                 <div class="input-group">
@@ -46,19 +44,19 @@
                        </form>
                     </div>
                     <div class="ratings">
-                        <p class="pull-right">15 reviews</p>
+                        <!-- <p class="pull-right">15 reviews</p>
                         <p>
                         @foreach($book_data as $rate)
                             <span class="glyphicon glyphicon-star"></span>
                        @endforeach
-                        </p>
+                        </p> -->
                     </div>
                   
                 </div>
             </div>
             @endforeach
        </div>
-       {{$book_data -> links()}}
+       {{$book_data ->appends(Request::except('page'))-> links()}}
 
     </div>
  
