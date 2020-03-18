@@ -20,8 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth')->middleware('is_user');
-Route::get('/favorites', 'FavoriteController@index')->middleware('auth')->middleware('is_user');
-Route::get('/myBooks', 'LeaseController@index')->middleware('auth')->middleware('is_user');
+Route::get('/favorites', 'FavoriteController@index')->middleware('auth')->middleware('is_user')->name('fav');
+Route::get('/myBooks', 'LeaseController@index')->middleware('auth')->middleware('is_user')->name('myBooks');
 Route::get('/dashboard', 'AdminController@admin')->middleware('auth')->middleware('is_admin')->name('admin');
 Route::resource('users', 'UserController')->middleware('auth')->middleware('is_admin');
 Route::resource('admins', 'AdminController')->middleware('auth')->middleware('is_admin');

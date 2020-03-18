@@ -16,7 +16,7 @@
                         <!-- main slider carousel items -->
                         <div class="carousel-inner">
                             <div class="active item carousel-item" data-slide-number="0">
-                                <img src="images/product1.jpg" class="img-fluid">
+                                <img src="{{ URL::to('/images') }}/{{$book->pic}}" class="img-fluid">
                             </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                           <label for="exampleInputEmail1">Review</label>
                           {!! Form::open(['route' => 'comments.store','method' => 'POST' , 'book_id' => $book->id]) !!}
                           <textarea class="form-control" id="exampleFormControlTextarea1" name='comment' rows="3" placeholder="add comment here"></textarea>
-                          <button type='submit' class="btn">Comment</button>
+                          <button type='submit' class="btn btn-primary">Comment</button>
                           <input type="hidden" name="book_id" value="{{$book->id}}">
                           {!! Form::close() !!}
                         </div>
@@ -57,8 +57,15 @@
                                 </div>
 
                      <!-- End Rate -->
+                     
+    
+
                       <p>Avaliable Copies: {{$book->no_copies}}</p>
+                      {{-- @if (count($book->no_copies) > 0) --}}
                       <a href="#leaseBook" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Lease</span></a>
+                      {{-- @else --}}
+                      {{-- <input type="button" value="" disabled>
+                      @endif --}}
                     </div>
                     
                 </div>
@@ -97,7 +104,7 @@
                    @foreach ($comments as $comment)
                        <div class="media">
                             <a class="media-left" href="#">
-                              <img src="http://lorempixel.com/40/40/people/1/">
+                              <img src="{{ URL::to('/users') }}/favicon.png">
                             </a>
                             <div class="media-body">    
                               <h4 class="media-heading user_name">User no.{{$comment->user_id}}</h4>
@@ -105,8 +112,15 @@
                               <p>{{$comment->content}}</p>
                               <p>{{$comment->rate}}</p>
                             {{-- <!-- <a href="/book/{{$book->id}}/edit" class="btn btn-primary">update</a> --> --}}
-                            <a href="{{url('comments').'/'.$comment->id.'/edit'}}" class="btn btn-primary">update</a>
-                            
+                            @can('update',$comment)
+                            <a href="{{url('comments').'/'.$comment->id.'/edit'}}" value="{{$book->id}}" class="btn btn-primary">update</a>
+                            @endcan
+                            {!! Form::open(['route'=>['comments.destroy',$comment->id],'method' => 'DELETE']) !!}
+                            @can('delete',$comment)
+                            <button type='submit' class='btn btn-danger'>delete</button>
+                            @endcan
+                            {!! Form::close() !!}
+
                             </div>
                           </div>
                           @endforeach
@@ -125,7 +139,7 @@
 
                     <div class="col-lg-3 col-md-6">
                         <div class="item">
-                            <img src="images/img1.jpg" alt="img">
+                            <img src="{{ URL::to('/images') }}/{{$related->pic}}">
                             <h3>{{$related->title}}</h3>
                             <h6><span class="price">{{$related->price}}</span> / <a href="#">Buy Now</a></h6>
                             <div class="hover">

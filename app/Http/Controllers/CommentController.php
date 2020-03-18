@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Middleware\Authorize;
 use PhpParser\Node\Expr\New_;
 use App\Comment;
 class CommentController extends Controller
@@ -79,9 +80,11 @@ class CommentController extends Controller
     public function update(Request $request, $id)
     {
         $comment = Comment::find($id);
+        $this -> Authorize('update',$comment);
         $comment->content = $request->comment;
+        $comment->book_id;
         $comment->save();
-        return back()->withInput();
+        return redirect(url('book', $comment->book_id));
         // return view('books.getdetails', ['id' => $id]);
     }
 
@@ -93,6 +96,10 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $this -> Authorize('delete',$comment);
+        $comment->delete();
+        return back()->withInput();
+        // return redirect(url('book', $comment->book_id));
     }
 }
