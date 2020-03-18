@@ -12,7 +12,7 @@
         </div>
         <div class=" card-body align-middle spacedFav">
             <a href="/book/{{$book->id}}" class="text-decoration-none">See more</a>
-            <a href="#" class="favoriteButton"><i class="fas fa-heart"></i></a>
+            <a href="#" class="{{in_array($book->id, (array)$favorites[0]) ? 'isfavoriteButton' : 'favoriteButton'}}"><i class="fas fa-heart"></i></a>
         </div>
       </div>
     @endforeach

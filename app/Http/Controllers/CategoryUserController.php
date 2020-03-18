@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Category;
+use Auth;
 
 class CategoryUserController extends Controller
 {
@@ -20,7 +21,9 @@ class CategoryUserController extends Controller
      */
     public function show($id)
     {
+        $userId = Auth::id();
         $books = DB::table('books')->where('category_id', $id)->paginate(3);
-        return view('user.category', ['books'=>$books]);
+        $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
+        return view('user.category')->with(compact('books', 'favorites'));
     }
 }
