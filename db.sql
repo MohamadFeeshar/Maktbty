@@ -4,6 +4,9 @@ values('admin', 'admin', 'admin', 'admin@email.co', 'I live here', 01234567890, 
 insert into users(name, username, email, address, phone, password, status, created_at, updated_at)
 values('mohamed', 'ali', 'mohamed@email.co', 'I live here', 01234567890, '$2y$10$OmMw4gRj2Knkz4Kg5Jx92.CTUFQu9EKvkPcQZMf6BOXHIZKNplzgW', 0, CURRENT_TIME(), CURRENT_TIME());
 
+insert into users(name, username, email, address, phone, password, status, created_at, updated_at)
+values('ahmed', 'test', 'test@email.co', 'I live here', 01234567890, '$2y$10$OmMw4gRj2Knkz4Kg5Jx92.CTUFQu9EKvkPcQZMf6BOXHIZKNplzgW', 0, CURRENT_TIME(), CURRENT_TIME());
+
 insert into categories (name, description, created_at, updated_at) values('horror', 'Horror Books', CURRENT_TIME(), CURRENT_TIME());
 insert into categories (name, description, created_at, updated_at) values('comedy', 'comedy Books', CURRENT_TIME(), CURRENT_TIME());
 insert into categories (name, description, created_at, updated_at) values('thriller', 'thriller Books', CURRENT_TIME(), CURRENT_TIME());
@@ -46,6 +49,10 @@ insert into favorites(user_id, book_id, created_at, updated_at)
 values(2, 5, CURRENT_TIME(), CURRENT_TIME());
 insert into favorites(user_id, book_id, created_at, updated_at)
 values(2, 3, CURRENT_TIME(), CURRENT_TIME());
+insert into favorites(user_id, book_id, created_at, updated_at)
+values(3, 2, CURRENT_TIME(), CURRENT_TIME());
+insert into favorites(user_id, book_id, created_at, updated_at)
+values(3, 7, CURRENT_TIME(), CURRENT_TIME());
 
 insert into leases(user_id, book_id, duration, created_at, updated_at)
 values(2, 1, 3,CURRENT_TIME(), CURRENT_TIME());
@@ -54,4 +61,8 @@ values(2, 4, 6,CURRENT_TIME(), CURRENT_TIME());
 insert into leases(user_id, book_id, duration, created_at, updated_at)
 values(2, 2, 9,CURRENT_TIME(), CURRENT_TIME());
 insert into leases(user_id, book_id, duration, created_at, updated_at)
-values(2, 3, 2,CURRENT_TIME(), CURRENT_TIME());
+values(3, 3, 2,CURRENT_TIME(), CURRENT_TIME());
+insert into leases(user_id, book_id, duration, created_at, updated_at)
+values(3, 7, 2,CURRENT_TIME(), CURRENT_TIME());
+insert into leases(user_id, book_id, duration, created_at, updated_at)
+values(3, 9, 2,CURRENT_TIME(), CURRENT_TIME());
