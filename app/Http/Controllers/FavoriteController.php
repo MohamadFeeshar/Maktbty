@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\User;
 use App\Favorite;
 use Auth;
@@ -19,7 +20,7 @@ class FavoriteController extends Controller
     {
         $userId = Auth::id();
         $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
-        $books = DB::table('books')->whereIn('id', $favorites)->get();
+        $books = DB::table('books')->whereIn('id', $favorites)->paginate(3);
         return view('user.favorites')->with(['books'=>$books]);
     }
 

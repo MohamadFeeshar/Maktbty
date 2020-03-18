@@ -1,36 +1,23 @@
-@extends('layouts.nav')
+@extends('layouts.user')
 @section('content')
-<section class="static about-sec">
-    <div class="container">
-        <div class="recomended-sec">
-        <div class="row" id="bookItem">
-        @foreach ($books as $book)
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="item" >
-                <img src="{{ URL::to('/images') }}/{{$book->pic}}" alt="{{$book -> title}}">
-
-                    <!-- <img src="images/img1.jpg" alt="img"> -->
-                    <h3>{{$book->title}}</h3>
-                    <h3>{{$book->summary}},author is{{$book->author}},pages number are{{$book->page_count}}</h3>
-                    <h6><span class="price">{{$book->price}}$</span></h6>
-                    <h3>Availble copies : {{$book->no_copies}}</h3>
-
-                    <div class="hover">
-                        <a href="{{url('book').'/'.$book->id}}">
-                    <span>
-                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                        </span>
-                    </a>
-                    </div>
-                </div>
-            </div>     
-            @endforeach
-     
+<div class="container">
+    <div class="spacedCards">
+    @foreach ($books as $book)
+      <div class="card" style="width: 18rem;">
+        <img src="{{$book->pic}}" class="img-book" alt="book's pic">
+        <div class="card-body">
+            <h5 class="card-title">{{$book->title}}</h5>
+            <p class="card-text">{{$book->summary}}</p>
+            
         </div>
+        <div class=" card-body align-middle spacedFav">
+            <a href="/book/{{$book->id}}" class="text-decoration-none">See more</a>
+            <a href="#" class="isfavoriteButton"><i class="fas fa-heart"></i></a>
         </div>
-        </div>
-    </section>  
+      </div>
+    @endforeach
+    </div>
+</div>
+<div class="pageLinks">{{ $books->links() }}</div>
 
 @endsection
