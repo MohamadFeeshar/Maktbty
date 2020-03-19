@@ -52,7 +52,6 @@ class LeaseController extends Controller
         $lease->user_id = Auth::id();
         $lease->book_id = $request->book_id;
         $copies = DB::table('books')->join('leases', 'books.id', '=', 'leases.book_id')->decrement('no_copies', 1);
-
         $lease->duration = $request->duration;
         $lease->save();
         return back()->withInput();
@@ -83,7 +82,7 @@ class LeaseController extends Controller
     {
         //
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -94,6 +93,7 @@ class LeaseController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
         
     }
 
