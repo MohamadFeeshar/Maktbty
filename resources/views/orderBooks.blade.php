@@ -1,92 +1,55 @@
 @extends('layouts.nav')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <!-- <div class="card-header">Dashboard</div> -->
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
 <div class="container">
-
 <div class="row">
-  <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="list-group list-group-flush">
-      @foreach($list_category as $category)  
-      <div class="container">
-          <div class="col-sm-8">
-            <form action="{{ route('category') }}" method="GET">
-            {{csrf_field()}}
-                 <div class="input-group">
-                    <input type="hidden" class="form-control" name="categoryTerm"value="{{ isset($category->id) ? $category->id : '' }}">
-                     <span class="input-group-btn">
-                            <button class="btn btn-secondary" style="width:70px;" type="submit">{{ $category->name }}</button>
-                        </span> 
-                 </div>
-            </form>
-          </div>
-     </div>
-       @endforeach
- 
-      </div>
-    </div>
-  
-    <div class="col-md-9">
-        <div class="row">
-       
-        @foreach($book_data as $book)
-            <div class="col-sm-4 col-lg-4 col-md-4"  class="column {{$book->category_id}}">
-                <div class="thumbnail">
-                <!-- http://placehold.it/320x150 -->
-                <img src="{{ URL::to('/images') }}/{{$book->pic}}" alt="{{$book -> title}}">
-                    <div class="caption">  
-                        <h4 class="pull-right">${{$book -> price}}</h4>
-                        <h4><a href="{{url('book').'/'.$book->id}}">{{$book -> title}}</a></h4>
-                        <h5>  author is {{$book -> author}}. book pages are {{$book -> page_count}},{{mb_strimwidth($book->summary, 0, 15,"...")}}<a target="_blank" href="{{url('book').'/'.$book->id}}">See more</a>.</h5>
-                        <h5> available copies :{{$book -> no_copies}}</h5>
-                       <form action="{{ route('favourite') }}" method="GET">
-                            {{csrf_field()}}
-                                <div class="input-group">
-                                    <input type="hidden" class="form-control" name="favouriteTerm" value="{{ isset($book->id) ? $book->id : '' }}">
-                                  <button type="submit">
-                                    <i class="fas fa-heart"style="font-size: 300%;content: '\f004';" id="fav" onclick="{this.style.color = 'red'}"></i>
-                                </button>
-                                </div>
-                       </form>
-                    </div>
-                    <div class="ratings">
-                        <!-- <p class="pull-right">15 reviews</p>
-                        <p>
-                        @foreach($book_data as $rate)
-                            <span class="glyphicon glyphicon-star"></span>
-                       @endforeach
-                        </p> -->
-                    </div>
-                  
-                </div>
-            </div>
-            @endforeach
-       </div>
-       {{$book_data ->appends(Request::except('page'))-> links()}}
-
-    </div>
- 
-</div>
-
-</div>
-
-
-                </div>
-            </div>
+<div class="col-md-3">
+        <p class="lead">Category</p>
+        <div class="list-group">
+        @foreach($list_category as $category)  
+            <a href="/category/{{$category->id}}" class="list-group-item">{{ $category->name }}</a>
+      
+        @endforeach
         </div>
     </div>
+    <div class="col-md-9">
+    <div class="row">
+    <div class="container">
+    <div class="spacedCards">
+    @foreach ($book_data as $book)
+      <div class="card" class="col-md-9" style="width: 18rem;">
+        <img src="{{$book->pic}}" class="img-book" alt="book's pic">
+        <div class="card-body">
+            <h5 class="card-title"><a href="{{url('book').'/'.$book->id}}">{{$book -> title}}</a></h5>
+            <p class="card-text">{{$book->summary}}</p>
+            
+            <h4 class="pull-right">${{$book -> price}}</h4>
+            <h5 class="card-text">  author is {{$book -> author}}. book pages are {{$book -> page_count}},{{mb_strimwidth($book->summary, 0, 15,"...")}}<a target="_blank" href="{{url('book').'/'.$book->id}}" class="text-decoration-none">See more</a>.</h5>
+            <h5> available copies :{{$book -> no_copies}}</h5>
+            <form action="{{ route('favourite') }}" method="GET">
+                {{csrf_field()}}
+                    <div class="input-group">
+                        <input type="hidden" class="form-control" name="favouriteTerm" value="{{ isset($book->id) ? $book->id : '' }}">
+                        <button type="submit">
+                        <i class="fas fa-heart"style="font-size: 200%;content: '\f004';" id="fav" onclick="{this.style.color = 'red'}"></i>
+                    </button>
+                    </div>
+            </form>
+            <a href="#" class="{{in_array($book->id, $favorites) ? 'isfavoriteButton' : 'favoriteButton'}}"><i class="fas fa-heart"></i></a>
+
+        </div>
+      </div>
+    @endforeach
+    </div>
+    </div>
+
+<div class="pageLinks">  {{$book_data ->appends(Request::except('page'))-> links()}}</div>
+</div>
+
+</div>
+</div>
+
 </div>
 @endsection
 
