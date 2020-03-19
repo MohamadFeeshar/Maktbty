@@ -32,7 +32,9 @@
                           <label for="exampleInputEmail1">Review</label>
                           {!! Form::open(['route' => 'comments.store','method' => 'POST' , 'book_id' => $book->id]) !!}
                           <textarea class="form-control" id="exampleFormControlTextarea1" name='comment' rows="3" placeholder="add comment here"></textarea>
+                          @can('canCommenting',$book)
                           <button type='submit' class="btn btn-primary">Comment</button>
+                          @endcan
                           <input type="hidden" name="book_id" value="{{$book->id}}">
                           {!! Form::close() !!}
                         </div>
@@ -61,11 +63,15 @@
     
 
                       <p>Avaliable Copies: {{$book->no_copies}}</p>
-                      {{-- @if (count($book->no_copies) > 0) --}}
-                      <a href="#leaseBook" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Lease</span></a>
-                      {{-- @else --}}
-                      {{-- <input type="button" value="" disabled>
-                      @endif --}}
+                      @can('canLease',$book)
+                      <a @if ($book->no_copies > 0)href="#leaseBook" @endif  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Lease</span></a>
+                      @endcan    
+                      {!! Form::open(['route' => ['Books.returnBack',$book->id],'method' => 'POST']) !!}
+                      @can('canReturn',$book)
+                      <button type='submit' class='btn btn-primary'>Return Back</button>
+                      @endcan
+                      {!! Form::close() !!}
+                               
                     </div>
                     
                 </div>

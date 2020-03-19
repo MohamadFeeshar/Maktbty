@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Book;
 use App\Category;
 use App\Comment;
-
+use App\Lease;
 class BookController extends Controller
 {
     /**
@@ -36,7 +36,12 @@ class BookController extends Controller
         return view('book', ['book' => $book, 'comments' => $comments, 'related' => $related]);
     }
 
-
+    public function returnBack($id){
+        $book = Book::find($id);
+        $copies = DB::table('books')->increment('no_copies', 1);
+        Lease::where('user_id' , Auth::id() )->where ('book_id',$book->id)->where('returned_at',null)->update(['returned_at'=>now()]);
+        return back()->withInput();
+    }
 
     /**
      * Show the form for creating a new resource.

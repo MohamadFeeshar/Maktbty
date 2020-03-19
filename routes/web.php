@@ -29,6 +29,7 @@ Route::resource('books', 'BookController')->middleware('auth')->middleware('is_a
 Route::resource('categories', 'CategoryController')->middleware('auth')->middleware('is_admin');
 Route::resource('comments','CommentController')->middleware('auth')->middleware('is_user');
 Route::get('/edit', 'CommentController@edit')->middleware('auth')->middleware('is_user');
+Route::post('book/{book}', 'BookController@returnBack')->name('Books.returnBack')->middleware('auth')->middleware('is_user');
 
 Route::resource('lease','LeaseController')->middleware('auth')->middleware('is_user');
 Route::get('/dashboard/users', 'UserController@index')->middleware('auth')->middleware('is_admin');
