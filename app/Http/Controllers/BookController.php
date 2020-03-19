@@ -37,7 +37,6 @@ class BookController extends Controller
     }
 
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -144,4 +143,6 @@ class BookController extends Controller
         $book->delete();
         return redirect('/dashboard/books');
     }
+
+    
 }

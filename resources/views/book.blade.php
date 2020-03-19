@@ -25,6 +25,7 @@
                 <div class="col-md-6 slider-content">
                     <h1>{{$book->title}}</h1>
                      <p>{{$book->author}}</p>
+                     <p>{{$book->summary}}</p>
                     <p></p>
                     <ul>
                         <li>
@@ -82,7 +83,6 @@
         </div>
         @endisset
         
-        
 
 
         <!-- Comments -->
@@ -100,7 +100,7 @@
                               <img src="{{ URL::to('/users') }}/favicon.png">
                             </a>
                             <div class="media-body">    
-                              <h4 class="media-heading user_name">User no.{{$comment->user_id}}</h4>
+                              <h4 class="media-heading user_name">{{$comment->user_id}}</h4>
                               <small class="pull-right">{{$comment->created_at}}</small>
                               <p>{{$comment->content}}</p>
                               <p>{{$comment->rate}}</p>
@@ -140,12 +140,6 @@
         </div>
     </section>
 
-   
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="js/rating.js"></script>
 
 
 
