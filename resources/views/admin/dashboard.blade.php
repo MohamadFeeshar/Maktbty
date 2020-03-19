@@ -25,7 +25,9 @@ foreach ($profit as $val) {
           title: "Week",
         },
         axisY: {
-          title: "Profit"
+          title: "Profit",
+          prefix: "$",
+
         },
         data: [{
           type: "line",
@@ -38,9 +40,7 @@ foreach ($profit as $val) {
   </script>
   @endpush
 
-
-
-  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+  <div id="chartContainer" style="padding-top:40px;height: 370px; width: 100%;"></div>
   @endsection
   
   
