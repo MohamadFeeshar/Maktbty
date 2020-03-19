@@ -24,6 +24,7 @@ class CategoryUserController extends Controller
         $userId = Auth::id();
         $books = DB::table('books')->where('category_id', $id)->paginate(3);
         $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
+        $favorites = json_decode(json_encode($favorites), true);
         return view('user.category')->with(compact('books', 'favorites'));
     }
 }

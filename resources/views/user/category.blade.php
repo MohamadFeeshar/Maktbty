@@ -8,11 +8,11 @@
         <div class="card-body">
             <h5 class="card-title">{{$book->title}}</h5>
             <p class="card-text">{{$book->summary}}</p>
-            
+        
         </div>
         <div class=" card-body align-middle spacedFav">
             <a href="/book/{{$book->id}}" class="text-decoration-none">See more</a>
-            <a href="#" class="{{in_array($book->id, (array)$favorites[0]) ? 'isfavoriteButton' : 'favoriteButton'}}"><i class="fas fa-heart"></i></a>
+        <i id ="{{$book->id}}" class="fas fa-heart toggleFavorite {{in_array($book->id, $favorites) ? 'isfavoriteButton ' : 'favoriteButton ' }}" ></i>
         </div>
       </div>
     @endforeach
