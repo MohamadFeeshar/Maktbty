@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\User;
 use App\Favorite;
 use Auth;
@@ -18,9 +19,8 @@ class FavoriteController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        //$favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
-        $books = DB::table('books')->rightJoin('favorites', 'books.id', '=', 'favorites.book_id', 'favorites.user_id', '=', $userId)->get();
-        //return dd(gettype($books));
+        $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
+        $books = DB::table('books')->whereIn('id', $favorites)->paginate(3);
         return view('user.favorites')->with(['books'=>$books]);
     }
 
@@ -98,5 +98,24 @@ class FavoriteController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     *  @param  \Illuminate\Http\Request  $request
+     *  @return \Illuminate\Http\Response
+     */
+    
+    public function addRemove(Request $request){
+        $userId = Auth::id();
+        $exist = DB::table('favorites')->where('user_id', $userId)->where('book_id', $request->bookId);
+        if($exist->exists()){
+            $exist->delete();
+            return response()->json(['success'=>'deleted']);
+        }
+        $favorites =new Favorite();
+        $favorites->user_id = Auth::id();
+        $favorites->book_id = $request->bookId;
+        $favorites->save();
+
+        return response()->json(['success'=>'added']);
     }
 }

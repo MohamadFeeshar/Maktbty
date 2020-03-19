@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\User;
 use App\Lease;
 use Auth;
@@ -19,9 +20,12 @@ class LeaseController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $books = DB::table('books')->rightJoin('leases', 'books.id', '=', 'leases.book_id', 'leases.user_id', '=', $userId)->get();
-        return view('user.myBooks')->with(['books'=>$books]);
-        //
+        // $books = DB::table('books')->rightJoin('leases', 'books.id', '=', 'leases.book_id', 'leases.user_id', '=', $userId)->get();
+        $leases = DB::table('leases')->where('user_id', $userId)->pluck('book_id');
+        $books = DB::table('books')->whereIn('id', $leases)->paginate(3);
+        $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
+        $favorites = json_decode(json_encode($favorites), true);
+        return view('user.myBooks')->with(compact('books', 'favorites'));
     }
 
     /**

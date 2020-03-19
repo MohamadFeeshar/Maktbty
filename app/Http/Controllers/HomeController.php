@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -25,13 +26,14 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-
+        $userId=Auth::id();
         $list = \App\Category::all();
         $searchTerm = $request->input('searchTerm');
-        $bookData = \App\Book::search($searchTerm)->orderBy('price', 'DESC')->paginate(3);
+        $bookData = \App\Book::search($searchTerm)->orderBy('created_at', 'DESC')->paginate(9);
              
         return view('home', ['list_category' => $list, 
-        'book_data'=>$bookData
+        'book_data'=>$bookData,
+        'favorites'=>$favorites
         ,compact('bookData')
         ]);
  
@@ -41,18 +43,22 @@ class HomeController extends Controller
         $list = \App\Category::all();
 
         $categoryItems = $request->input('categoryTerm');
-        $bookData = \App\Book::where('category_id', 'like','%' .$categoryItems. '%')->orderBy('created_at', 'DESC')->paginate(3);
+        $bookData = \App\Book::where('category_id', 'like','%' .$categoryItems. '%')->orderBy('created_at', 'DESC')->paginate(9);
 
-        return view ('bookcategory',['list_category' => $list, 'book_data'=>$bookData
+        return view ('bookcategory',['list_category' => $list, 
+        'book_data'=>$bookData
+        ,compact('categoryItems')
         ]);
     }
     public function order(Request $request)
     {
         $list = \App\Category::all();
         $order = $request->input('order');
-        $bookData = \App\Book::orderBy($order, 'DESC')->paginate(3);
+        $bookData = \App\Book::orderBy($order, 'DESC')->paginate(9);
         // dd($order);
-        return view ('orderBooks',['list_category' => $list, 'book_data'=>$bookData
+        return view ('orderBooks',['list_category' => $list, 
+        'book_data'=>$bookData,
+        compact('order')
         ]);
     }
 }

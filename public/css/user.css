@@ -1,0 +1,45 @@
+.categoryLinks{
+    list-style-type: none;
+}
+.spacedCards{
+  border: 1px solid pink;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.img-book{
+    width:150px;
+    height:150px;
+}
+.cards{
+    background-color: #bada55;
+    flex-grow:1;
+    margin: 10px;
+    height: 50px;
+}
+.pageLinks{
+    display: flex;
+    justify-content: center;
+}
+.spacedFav{
+    display: flex;
+    justify-content: space-around;
+}
+.isfavoriteButton{
+    font-size: 2em;
+    color: red;
+    line-height: 0.1em;
+}
+.favoriteButton{
+    font-size: 2em;
+    color: grey;
+    line-height: 0.1em;
+}
+.isfavoriteButton:hover{
+    line-height: 0.1em;
+    color: grey
+}
+.favoriteButton:hover{
+    line-height: 0.1em;
+    color: red;
+}
