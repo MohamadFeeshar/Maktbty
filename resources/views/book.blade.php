@@ -23,7 +23,7 @@
                     <!--/main slider carousel-->
                 </div>
                 <div class="col-md-6 slider-content">
-                    <h1>{{$book->title}}</h1>
+                    <h1 class="test">{{$book->title}}</h1>
                      <p>{{$book->author}}</p>
                      <p>{{$book->summary}}</p>
                     <p></p>

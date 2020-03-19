@@ -30,6 +30,7 @@ class HomeController extends Controller
         $list = \App\Category::all();
         $searchTerm = $request->input('searchTerm');
         $bookData = \App\Book::search($searchTerm)->orderBy('created_at', 'DESC')->paginate(9);
+        $favorites =  \App\Favorite::all();
              
         return view('home', ['list_category' => $list, 
         'book_data'=>$bookData,

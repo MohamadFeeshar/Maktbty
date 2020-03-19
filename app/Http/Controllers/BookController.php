@@ -31,7 +31,7 @@ class BookController extends Controller
 
         $book = Book::find($id);
         $comments = Comment::where('book_id', $id)->get();
-        $related = Book::where('category_id', $book->category_id)->get();
+        $related = Book::where('category_id', $book->category_id)->take(4)->get();
 
         return view('book', ['book' => $book, 'comments' => $comments, 'related' => $related]);
     }
