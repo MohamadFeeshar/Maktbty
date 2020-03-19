@@ -19,7 +19,7 @@
     <div class="spacedCards">
     @foreach ($book_data as $book)
       <div class="card" class="col-md-9" style="width: 18rem;">
-        <img src="{{$book->pic}}" class="img-book" alt="book's pic">
+        <img src="{{ URL::to('/images') }}/{{$book->pic}}" class="img-book" alt="book's pic">
         <div class="card-body">
             <h5 class="card-title"><a href="{{url('book').'/'.$book->id}}">{{$book -> title}}</a></h5>
             <p class="card-text">{{$book->summary}}</p>
