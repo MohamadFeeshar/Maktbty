@@ -38,11 +38,11 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories,name,NULL,id,deleted_at,NULL',
-            'desc' => 'required|string'
+            'description' => 'required|string'
         ]);
         $category = new Category();
         $category->name = $request->name;
-        $category->desc = $request->desc;
+        $category->description = $request->description;
         $category->save();
         return redirect('/dashboard/categories');
     }
@@ -81,11 +81,11 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => "required|unique:categories,name,{$id},id,deleted_at,NULL",
-            'desc' => 'required|string'
+            'description' => 'required|string'
         ]);
         $category = Category::find($id);
         $category->name = $request->name;
-        $category->desc = $request->desc;
+        $category->description = $request->description;
         $category->save();
         return redirect('/dashboard/categories');
     }

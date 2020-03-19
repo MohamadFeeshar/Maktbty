@@ -26,19 +26,10 @@ Dashboard
             <h2>Manage <b>Categories</b></h2>
           </div>
           <div class="col-sm-6">
-            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Category</span></a>
+            <a href="#addCategory" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Category</span></a>
           </div>
         </div>
       </div>
-      @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-          @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-          @endforeach
-        </ul>
-      </div>
-      @endif
       <table class="table table-striped table-hover">
         <thead>
           <tr>
@@ -48,7 +39,6 @@ Dashboard
                 <label for="selectAll"></label>
               </span>
             </th>
-            <th>ID</th>
             <th>Name</th>
             <th>Description</th>
             <th>Actions</th>
@@ -63,9 +53,8 @@ Dashboard
                 <label for="checkbox1"></label>
               </span>
             </td>
-            <td>{{ $category->id }}</td>
             <td>{{ $category->name }}</td>
-            <td>{{ $category->desc }}</td>
+            <td>{{ $category->description }}</td>
             <td>
               <a class="edit" href={{ route("categories.edit",$category->id) }}><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
               {!! Form::open(['route' => ['categories.destroy',$category->id],'method' => 'DELETE']) !!}
@@ -78,7 +67,7 @@ Dashboard
       </table>
     </div>
     <!-- Add Modal HTML -->
-    <div id="addEmployeeModal" class="modal fade">
+    <div id="addCategory" class="modal">
       <div class="modal-dialog">
         <div class="modal-content">
           {!! Form::open(['route' => 'categories.store','method' => 'post']) !!}
@@ -90,10 +79,16 @@ Dashboard
             <div class="form-group">
               <label>Name</label>
               <input name="name" type="text" class="form-control" required>
+              @error('name')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
             </div>
             <div class="form-group">
               <label>Description</label>
-              <input name="desc" type="text" class="form-control" required>
+              <input name="description" type="text" class="form-control" required>
+              @error('description')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
             </div>
           </div>
 
@@ -114,6 +109,15 @@ Dashboard
 
 
 @section('scripts')
+
+@if (count($errors) > 0)
+<script>
+  $(document).ready(function() {
+    $('#addCategory').modal('show');
+  });
+</script>
+@endif
+
 <script type="text/javascript">
   $(document).ready(function() {
     // Activate tooltip

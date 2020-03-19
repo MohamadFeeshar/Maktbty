@@ -25,6 +25,9 @@ Dashboard
                 <div class="form-group">
                     <label>author</label>
                     {!! Form::text('author', $value = null, ['class' => 'form-control']) !!}
+                    @error('author')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div>
                     <label>Cover Image</label>
@@ -40,10 +43,16 @@ Dashboard
                 <div class="form-group">
                     <label>Price</label>
                     {!! Form::text('price', $value = null, ['class' => 'form-control']) !!}
+                    @error('price')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>number of Copies</label>
                     {!! Form::text('no_copies', $value = null, ['class' => 'form-control']) !!}
+                    @error('no_copies')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="modal-footer">
