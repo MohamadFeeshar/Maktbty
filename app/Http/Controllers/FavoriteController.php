@@ -99,4 +99,23 @@ class FavoriteController extends Controller
     {
         //
     }
+    /**
+     *  @param  \Illuminate\Http\Request  $request
+     *  @return \Illuminate\Http\Response
+     */
+    
+    public function addRemove(Request $request){
+        $userId = Auth::id();
+        $exist = DB::table('favorites')->where('user_id', $userId)->where('book_id', $request->bookId);
+        if($exist->exists()){
+            $exist->delete();
+            return response()->json(['success'=>'deleted']);
+        }
+        $favorites =new Favorite();
+        $favorites->user_id = Auth::id();
+        $favorites->book_id = $request->bookId;
+        $favorites->save();
+
+        return response()->json(['success'=>'added']);
+    }
 }

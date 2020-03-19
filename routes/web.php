@@ -49,4 +49,5 @@ Route::get('book/{book}', 'BookController@getBookDetails')->name('books.getdetai
 Route::get('/book', 'BookController@getBookDetails')->name('books.getdetails')->middleware('auth')->middleware('is_user');
 Route::get('/category', 'HomeController@category')->name('category')->middleware('is_user');
 Route::get('/order', 'HomeController@order')->name('order')->middleware('is_user');
+Route::post('favoriteToggle', 'FavoriteController@addRemove')->name('addRemoveFavorite')->middleware('is_user');
 Route::get('/favourite', 'FavoriteController@store')->name('favourite')->middleware('is_user');

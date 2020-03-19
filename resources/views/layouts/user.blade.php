@@ -117,5 +117,40 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        $(document).ready(function(){
+            $('.toggleFavorite').click(function (e) {
+                e.preventDefault();
+                let element = $(this);
+                let favorited = $(this).hasClass("isfavoriteButton") === true ? 1 : 0;
+                let bookId = $(this).attr('id');
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: '{{ route('addRemoveFavorite') }}',
+                    data: {'favorited': favorited, 'bookId': bookId, _token: '{{csrf_token()}}'},
+                    success: function (data) {
+                        if(data.success == 'deleted'){
+                            alert("removed to favorites")
+                            console.log(element);
+                            element.toggleClass("isfavoriteButton");
+                            element.toggleClass("favoriteButton");
+
+                        }
+                        else if(data.success === 'added'){
+                            alert("added from favorites")
+                            console.log('added');
+                            element.toggleClass("isfavoriteButton");
+                            element.toggleClass("favoriteButton");
+                        }
+                        
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                        console.log(errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
