@@ -135,6 +135,9 @@ return [
         ],
         'book_id' => [
             'unique' => 'Book already leased',
+        ],
+        'category_id' => [
+            'required' => 'Category required',
         ]
     ],
 

@@ -63,7 +63,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|string|unique:books,title,NULL,user_id,deleted_at,NULL',
             'author' => 'required|string',
-            // 'category' => 'required',
+            'category_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required|numeric',
             'no_copies' => 'required|numeric'
