@@ -133,7 +133,7 @@
                             <h4 class="media-heading user_name">{{$comment->user_id}}</h4>
                             <h2 class="pull-right">{{$comment->created_at}}</h2>
                             <h3>{{$comment->content}}</h3>
-                            <h3>{{$comment->rate}}</h3>
+                            <h3>{{$userRate}}</h3>
                             <div style="display:inline-block">
                             {{-- <!-- <a href="/book/{{$book->id}}/edit" class="btn btn-primary">update</a> --> --}}
                             @can('update',$comment)
