@@ -44,7 +44,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->description = $request->description;
         $category->save();
-        return redirect('/dashboard/categories');
+        return redirect('/dashboard/categories')->with('success','Category added successfully');
     }
 
     /**
@@ -87,7 +87,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->description = $request->description;
         $category->save();
-        return redirect('/dashboard/categories');
+        return redirect('/dashboard/categories')->with('success','Category updated successfully');
     }
 
     /**

@@ -51,7 +51,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
         $categories = \App\Category::all();
-        return redirect('/home/profile')->with('success','Profile updated successfully!');
+        return redirect('/home')->with('success','Profile updated successfully!');
     }
 
     public function index()
@@ -93,7 +93,7 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->password = Hash::make($request->password);
         $user->save();
-        return redirect('/dashboard/users');
+        return redirect('/dashboard/users')->with('success','User added successfully');
     }
 
     /**
@@ -143,7 +143,7 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->password = Hash::make($request->password);
         $user->save();
-        return redirect('/dashboard/users');
+        return redirect('/dashboard/users')->with('success','User data updated successfully');
     }
 
     /**

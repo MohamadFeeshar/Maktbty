@@ -59,7 +59,7 @@ Dashboard
                 </div>
             </div>
             <div class="modal-footer">
-                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <input type="button" onclick="window.location='{{ url("dashboard/users") }}'" class="btn btn-default" data-dismiss="modal" value="Cancel">
                 <input type="submit" class="btn btn-success" value="Save">
             </div>
             {!! Form::close() !!}

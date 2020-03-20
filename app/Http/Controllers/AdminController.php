@@ -75,7 +75,7 @@ class AdminController extends Controller
         $admin->type = 'admin';
         $admin->password = Hash::make($request->password);
         $admin->save();
-        return redirect('/dashboard/admins');
+        return redirect('/dashboard/admins')->with('success','Admin added successfully');
     }
 
     /**
@@ -126,7 +126,7 @@ class AdminController extends Controller
         $admin->address = $request->address;
         $admin->password = Hash::make($request->password);
         $admin->save();
-        return redirect('/dashboard/admins');
+        return redirect('/dashboard/admins')->with('success','Admin data updated successfully');
     }
 
     /**
