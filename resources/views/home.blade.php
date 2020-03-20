@@ -77,6 +77,32 @@
                     <!-- <div class=" card-body align-middle spacedFav"> -->
                     <a href="#" class="{{in_array($book->id, $favorites) ? 'isfavoriteButton' : 'favoriteButton'}}"><i class="fas fa-heart"></i></a>
                     <!-- </div> -->
+                    @can('canLease',$book)
+                      <a @if ($book->no_copies > 0)href="#leaseBook" @endif  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Lease</span></a>
+                      @endcan    
+                      {!! Form::open(['route' => ['Books.returnBack',$book->id],'method' => 'POST']) !!}
+                      @can('canReturn',$book)
+                      <button type='submit' class='btn btn-primary'>Return Back</button>
+                      @endcan
+                      {!! Form::close() !!}
+                      
+                      <div id="leaseBook" class="modal fade">
+                        <div class="modal-content">
+                            {!! Form::open(['route' => 'lease.store','method' => 'POST','book_id' => $book->id]) !!}
+                            <div class="modal-body">
+                                <div class="form-group">
+                                <label>Duration in Days</label>
+                                <input name="duration" type="text" class="form-control" required>
+                                </div>
+                                <div class="modal-footer">
+                                <input type="submit" class="btn btn-success" value="Add">
+                                <input type="hidden" name="book_id" value="{{$book->id}}">
+                                </div>
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             @endforeach
