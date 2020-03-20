@@ -13,7 +13,11 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         @isset($book)
-
+        @if(session()->has('alert'))
+        <div class="alert alert-success">
+        {{ session()->get('alert') }}
+        @endif
+        </div>
         <div class="row">
             <div class="col-md-6 slider-sec">
                 <!-- main slider carousel -->
@@ -35,6 +39,10 @@
                 <ul>
                     <li>
                         <div class="form-group">
+                            @if(session()->has('alert'))
+                        <div class="alert alert-success">
+                                {{ session()->get('alert') }}
+                            @endif 
                             <label for="exampleInputEmail1">Review</label>
                             {!! Form::open(['route' => 'comments.store','method' => 'POST' , 'book_id' => $book->id]) !!}
                             <textarea class="form-control" id="exampleFormControlTextarea1" name='comment' rows="3" placeholder="add comment here"></textarea>
@@ -43,6 +51,7 @@
                             @endcan
                             <input type="hidden" name="book_id" value="{{$book->id}}">
                             {!! Form::close() !!}
+                        </div>
                         </div>
                     </li>
                 </ul>

@@ -43,7 +43,7 @@ class CommentController extends Controller
         $comment->content = $request->comment;
         $comment->rate = 4;
         $comment->save();
-        return back()->withInput();
+        return back()->withInput()->with('alert','comment created successfully!');;
     }
 
     /**
