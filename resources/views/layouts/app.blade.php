@@ -14,14 +14,14 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- book style -->
-    <link rel="stylesheet" href="css/book.css">
+    <link rel="stylesheet" href="{{ asset('css/book.css') }}">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
   <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="fontawesome-free-5.12.1-web/css/all.css">
+    <link rel="stylesheet" href="/fontawesome-free-5.12.1-web/css/all.css">
 
 <!-- Add custom CSS here -->
     <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
@@ -94,5 +94,34 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        $(document).ready(function(){
+            $('.rating span').click(function (e) {
+                e.preventDefault();
+                let rate = $(this).attr("id").split("rate-")[1];
+                let bookId = {{$book->id}};
+                console.log(rate);
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: '{{ route('rateBook') }}',
+                    data: {'rate': rate, 'bookId': bookId, _token: '{{csrf_token()}}'},
+                    success: function (data) {
+                        console.log(data);
+                        for(let i = 1; i <= 5; i++){
+                            $("#rate-"+i).removeClass("rated");
+                            if(i <= rate){
+                                $("#rate-"+i).addClass("rated");
+                            }
+                            
+                        }
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                        console.log(errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

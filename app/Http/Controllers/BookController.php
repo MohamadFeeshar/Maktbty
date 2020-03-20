@@ -28,12 +28,13 @@ class BookController extends Controller
     {
         $book = new Book();
         $comments = new Comment();
-
+        $userRate = DB::table('rates')->where('user_id', Auth::id())->where('book_id', $id)->get(['rate'])[0]->rate;
+        
         $book = Book::find($id);
         $comments = Comment::where('book_id', $id)->get();
         $related = Book::where('category_id', $book->category_id)->take(4)->get();
 
-        return view('book', ['book' => $book, 'comments' => $comments, 'related' => $related]);
+        return view('book', ['book' => $book, 'comments' => $comments, 'related' => $related, 'userRate' => $userRate]);
     }
 
     public function returnBack($id){
