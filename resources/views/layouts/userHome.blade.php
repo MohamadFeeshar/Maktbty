@@ -20,8 +20,11 @@ Maktbty
   <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/css/now-ui-dashboard.css?v=1.5.0') }}" rel="stylesheet" />
   <link href="{{ asset('assets/demo/demo.css') }}" rel="stylesheet" />
+  
+  <link href="{{ asset('css/user.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+<script src="{{ asset('js/jquery-1.10.2.js') }}"></script>
 </head>
 
 <body class="">
@@ -105,10 +108,45 @@ Maktbty
   </div>
 
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="./js/jquery-1.10.2.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+        $('.toggleFavorite').click(function (e) {
+            e.preventDefault();
+            let element = $(this);
+            let favorited = $(this).hasClass("isfavoriteButton") === true ? 1 : 0;
+            let bookId = $(this).attr('id');
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: '{{ route('addRemoveFavorite') }}',
+                data: {'favorited': favorited, 'bookId': bookId, _token: '{{csrf_token()}}'},
+                success: function (data) {
+                    if(data.success == 'deleted'){
+                        alert("removed to favorites")
+                        console.log(element);
+                        element.toggleClass("isfavoriteButton");
+                        element.toggleClass("favoriteButton");
+
+                    }
+                    else if(data.success === 'added'){
+                        alert("added to favorites")
+                        console.log('added');
+                        element.toggleClass("isfavoriteButton");
+                        element.toggleClass("favoriteButton");
+                    }
+                    
+                },
+                error: function (data, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        });
+    });
+  </script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chart JS -->
@@ -118,7 +156,9 @@ Maktbty
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/demo/demo.js"></script>
+  
   @yield('scripts')
+  
 </body>
 
 </html>
