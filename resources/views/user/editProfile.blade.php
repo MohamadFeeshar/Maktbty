@@ -15,7 +15,7 @@ My profile
                 {{ session()->get('success') }}
             </div>
             @endif
-            {{ Form::model($user, ['route' => ['users.updateProfile', $user->id], 'method' => 'get']) }}
+            {{ Form::model($user, ['route' => ['users.updateProfile', $user->id], 'method' => 'put']) }}
             <div class="modal-header">
                 <h4 class="modal-title">Edit User</h4>
             </div>

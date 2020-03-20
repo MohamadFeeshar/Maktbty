@@ -37,7 +37,7 @@ Route::get('/dashboard/users', 'UserController@index')->middleware('auth')->midd
 Route::get('/dashboard/editUser', 'UserController@edit')->middleware('auth')->middleware('is_admin');
 Route::get('users', 'UserController@ban')->name('users.ban')->middleware('auth')->middleware('is_admin');
 Route::get('/home/profile', 'UserController@editProfile')->name('users.editProfile')->middleware('auth')->middleware('is_user');
-Route::get('users', 'UserController@updateProfile')->name('users.updateProfile')->middleware('auth')->middleware('is_user');
+Route::put('users', 'UserController@updateProfile')->name('users.updateProfile')->middleware('auth')->middleware('is_user');
 
 Route::get('/dashboard/categories', 'CategoryController@index')->middleware('is_admin')->middleware('auth');
 

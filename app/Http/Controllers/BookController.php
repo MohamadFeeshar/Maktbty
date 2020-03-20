@@ -80,7 +80,7 @@ class BookController extends Controller
         $book->price = $request->price;
         $book->no_copies = $request->no_copies;
         $book->save();
-        return redirect('/dashboard/books');
+        return redirect('/dashboard/books')->with('success','Book added successfully');
     }
 
     /**
@@ -135,7 +135,7 @@ class BookController extends Controller
         $book->price = $request->price;
         $book->no_copies = $request->no_copies;
         $book->save();
-        return redirect('/dashboard/books');
+        return redirect('/dashboard/books')->with('success','Book updated successfully');
     }
 
     /**
