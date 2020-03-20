@@ -26,7 +26,7 @@ class LeaseController extends Controller
         $books = DB::table('books')->whereIn('id', $leases)->paginate(3);
         $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
         $favorites = json_decode(json_encode($favorites), true);
-        return view('user.myBooks',['list_category' => $list])->with(compact('books', 'favorites'));
+        return view('user.myBooks',['list_category' => $list,'books'=>$books,'favorites'=>$favorites,compact('books'),compact( 'favorites')]);
     }
 
     /**

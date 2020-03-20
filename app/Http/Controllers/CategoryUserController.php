@@ -22,9 +22,10 @@ class CategoryUserController extends Controller
     public function show($id)
     {
         $userId = Auth::id();
+        $list = \App\Category::all();
         $books = DB::table('books')->where('category_id', $id)->paginate(3);
         $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
         $favorites = json_decode(json_encode($favorites), true);
-        return view('user.category')->with(compact('books', 'favorites'));
+        return view('user.category',['list_category' => $list,'books'=>$books,'favorites'=>$favorites,compact('books'),compact( 'favorites')]);
     }
 }
