@@ -44,7 +44,7 @@ class BookController extends Controller
         $book = Book::find($id);
         $copies = DB::table('books')->increment('no_copies', 1);
         Lease::where('user_id' , Auth::id() )->where ('book_id',$book->id)->delete();
-        return back()->withInput();
+        return back()->withInput()->with('alert','successful operation!');
     }
 
     /**
@@ -67,7 +67,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|string|unique:books,title,NULL,user_id,deleted_at,NULL',
             'author' => 'required|string',
-            // 'category' => 'required',
+            'category_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required|numeric',
             'no_copies' => 'required|numeric'

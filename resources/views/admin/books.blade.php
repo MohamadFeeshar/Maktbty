@@ -60,7 +60,11 @@ Dashboard
             <td>{{ $book->author }}</td>
             <td>
               <img src="{{ URL::to('/images') }}/{{$book->pic}}" alt="No image" height="80" width="60"></td>
-            <td>{{ $book->category->name }}</td>
+            <td>
+              @if($book->category)
+              {{ $book->category->name }}
+              @endif
+            </td>
             <td>{{ $book->price }}</td>
             <td>{{ $book->no_copies }}</td>
             <td>
@@ -113,7 +117,7 @@ Dashboard
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
               </select>
-              @error('category')
+              @error('category_id')
               <div class="alert alert-danger">{{ $message }}</div>
               @enderror
             </div>

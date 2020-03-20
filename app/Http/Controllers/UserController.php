@@ -23,6 +23,37 @@ class UserController extends Controller
         return redirect('/dashboard/users');
     }
 
+    public function editProfile()
+    {
+        $id = Auth::id();
+        $user = User::find($id);
+        $categories = \App\Category::all();
+        return view('user.editProfile', ['user' => $user, 'list_category' => $categories]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $id = Auth::id();
+        // echo $id;
+        $request->validate([
+            'username' => "required|string|max:50|unique:users,username,{$id},id,deleted_at,NULL",
+            'email' => "required|string|email|unique:users,email,{$id},id,deleted_at,NULL",
+            'phone' => "required|digits:11|unique:users,phone,{$id},id,deleted_at,NULL",
+            'address' => 'required|string',
+            'password' => 'required|string|min:8'
+        ]);
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        $categories = \App\Category::all();
+        return redirect('/home/profile')->with('success','Profile updated successfully!');
+    }
+
     public function index()
     {
         $users = User::where('type', 'user')->get();

@@ -49,8 +49,9 @@ class LeaseController extends Controller
     {
         // dd( Auth::id());
         // die();
+        $user_id=Auth::id();
         $request->validate([
-            'book_id' => 'unique:leases,book_id,NULL,id,deleted_at,NULL',
+            'book_id' => 'unique:leases,book_id,NULL,id,deleted_at,'.$user_id,
         ]);
         $lease = new Lease();
         $lease->user_id = Auth::id();
@@ -58,7 +59,7 @@ class LeaseController extends Controller
         $lease->duration = $request->duration;
         $lease->save();
         $copies = DB::table('books')->join('leases', 'books.id', '=', 'leases.book_id')->decrement('no_copies', 1);
-        return back()->withInput();
+        return back()->withInput()->with('alert','successful operation!');
         // return redirect()->route('/book', ['id' => $request->book_id]);
         // return view('books.getdetails', ['id' => $id]);
         // return view('books.getdetails', ['id' => $id]);
