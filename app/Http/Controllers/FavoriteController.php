@@ -18,10 +18,12 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        $userId = Auth::id();
+        $list = \App\Category::all();
+
         $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
         $books = DB::table('books')->whereIn('id', $favorites)->paginate(3);
-        return view('user.favorites')->with(['books'=>$books]);
+        return view('user.favorites',['list_category' => $list,'books'=>$books,'favorites'=>$favorites,compact('books'),compact( 'favorites')]);
+        
     }
 
     /**

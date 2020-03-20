@@ -1,15 +1,16 @@
 @extends('layouts.userHome')
-
 @section('content')
 
-<div class="container">
-<div class="row">
-<div class="col-md-3">
-        <p class="lead">Category</p>
-        <div class="list-group">
+
+<!-- <div class="container">
+<div class="row"> -->
+
+<!-- <div class="col-md-2"> -->
+        <!-- <p class="lead">Category</p> -->
+        <!-- <div class="list-group"> -->
         <!-- @foreach($list_category as $category)   -->
             <!-- <a href="/category/{{$category->id}}" class="list-group-item">{{ $category->name }}</a> -->
-         <!-- -->
+            <!-- -->
             <!-- <form action="{{ route('category') }}" method="GET">
             {{csrf_field()}}
                  <div class="input-group">
@@ -21,9 +22,10 @@
             </form> -->
             <!-- -->
         <!-- @endforeach -->
-        </div>
-    </div>
-        <div class="col-md-9">
+        <!-- </div> -->
+    <!-- </div> -->
+    
+    <!-- <div class="col-md-9"> -->
     <div class="row">
     <div class="container">
     <div class="spacedCards" >
@@ -35,7 +37,7 @@
             
             <h4 class="pull-right">${{$book -> price}}</h4>
             <h6 class="card-text">  author is {{$book -> author}}, book pages are {{$book -> page_count}}.</h6>
-            <h6 class="card-text">{{mb_strimwidth($book->summary, 0, 15,"...")}}<a target="_blank" href="{{url('book').'/'.$book->id}}" class="text-decoration-none">See more</a></h6>
+            <h6 class="card-text">{{mb_strimwidth($book->summary, 0, 10,"...")}}<a target="_blank" href="{{url('book').'/'.$book->id}}" class="text-decoration-none">See more</a></h6>
 
             <h6> available copies :{{$book -> no_copies}}</h6>
             <form action="{{ route('favourite') }}" method="GET">
@@ -54,15 +56,14 @@
       </div>
     @endforeach
     </div>
-    <div class="pageLinks">  {{$book_data ->appends(Request::except('page'))-> links()}}</div>
+    <div class="pageLinks" style="display:flex;justify-content:center;align-items:center;">  {{$book_data ->appends(Request::except('page'))-> links()}}</div>
 
     </div>
 
 </div>
-</div>
-</div>
-
-</div>
+<!-- </div> -->
+<!-- </div>
+</div> -->
 
 
 @endsection
