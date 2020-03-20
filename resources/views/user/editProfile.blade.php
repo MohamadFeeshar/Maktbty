@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.userHome')
 
 @section('title')
-Dashboard
+My profile
 @endsection
 
 
@@ -10,7 +10,12 @@ Dashboard
 <div id="editUserModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            {{ Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'put']) }}
+            @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+            @endif
+            {{ Form::model($user, ['route' => ['users.updateProfile', $user->id], 'method' => 'get']) }}
             <div class="modal-header">
                 <h4 class="modal-title">Edit User</h4>
             </div>

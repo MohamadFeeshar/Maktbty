@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +7,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-Maktbty
+    Maktbty
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -21,7 +20,7 @@ Maktbty
   <link href="{{ asset('assets/css/now-ui-dashboard.css?v=1.5.0') }}" rel="stylesheet" />
   <link href="{{ asset('assets/demo/demo.css') }}" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
 </head>
 
 <body class="">
@@ -30,7 +29,7 @@ Maktbty
     <div class="sidebar" data-color="blue">
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-        
+
           <li class="nav-item dropdown">
             <a style="color:white;background-color:#141E30;font-size: 0.8571em" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{ Auth::user()->name }} <span class="caret"></span>
@@ -49,48 +48,52 @@ Maktbty
           </li>
           <div class="col-md-12">
 
-          <p class="lead" style="color:black;font-weight: bold;">Category</p>
+            <p class="lead" style="color:black;font-weight: bold;">Category</p>
 
-          @foreach($list_category as $category)  
+            @foreach($list_category as $category)
 
-          <li>
-            <a href="/category/{{$category->id}}" class="list-group-item" style="background-color:grey;height:4rem;">
-              <h2 style="color:white;font-weight: bold;display:flex;justify-content:center;align-items:center;">{{ $category->name }}</h2>
-            </a>
-          </li>
-          @endforeach
+            <li>
+              <a href="/category/{{$category->id}}" class="list-group-item" style="background-color:grey;height:4rem;">
+                <h2 style="color:white;font-weight: bold;display:flex;justify-content:center;align-items:center;">{{ $category->name }}</h2>
+              </a>
+            </li>
+            @endforeach
           </div>
-          </ul>
+        </ul>
       </div>
     </div>
 
     <!-- End sidebar -->
 
     <div class="main-panel" id="main-panel">
- 
+
 
       <div class="panel-header panel-header-sm">
-      <ul class="navbar-nav mr-auto" style="display:inline-block;justify-content:center;align-items:center;">
+        <ul class="navbar-nav mr-auto" style="display:inline-block;justify-content:center;align-items:center;">
 
-        <li class="navbar-brand" >
-        <a class="nav-link" style="color:white;" onMouseOver="this.style.color='#0F0'"onMouseOut="this.style.color='#fff'" href="{{route('home')}}">Maktbty <span class="sr-only">(current)</span></a>
-        </li>
-        
-        <li class="navbar-brand" >
-        <a class="nav-link"   style="color:white;" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#fff'" href="{{route('myBooks')}}">MyBooks <span class="sr-only">(current)</span></a>
-        </li>
+          <li class="navbar-brand">
+            <a class="nav-link" style="color:white;" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#fff'" href="{{route('home')}}">Maktbty <span class="sr-only">(current)</span></a>
+          </li>
 
-        <li class="navbar-brand" >
-        <a class="nav-link"  style="color:white;" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#fff'"href="{{route('fav')}}">Favourites <span class="sr-only">(current)</span></a>
+          <li class="navbar-brand">
+            <a class="nav-link" style="color:white;" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#fff'" href="{{route('myBooks')}}">MyBooks <span class="sr-only">(current)</span></a>
+          </li>
 
-        </li>
-<span><span>   
-                @yield('searchOrder')
-                <span></span>
+          <li class="navbar-brand">
+            <a class="nav-link" style="color:white;" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#fff'" href="{{route('fav')}}">Favourites <span class="sr-only">(current)</span></a>
 
-      </ul>    
-<span></span>
-</div>
+          </li>
+          <li class="navbar-brand">
+            <a class="nav-link" style="color:white;" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#fff'" href="{{route('users.editProfile')}}">My profile <span class="sr-only">(current)</span></a>
+          </li>
+
+          <span><span>
+              @yield('searchOrder')
+              <span></span>
+
+        </ul>
+        <span></span>
+      </div>
       <div class="content" style="display:flex;justify-content:start;align-items:start;">
         @yield('content')
       </div>

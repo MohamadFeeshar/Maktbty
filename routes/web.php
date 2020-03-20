@@ -28,14 +28,16 @@ Route::resource('admins', 'AdminController')->middleware('auth')->middleware('is
 Route::resource('books', 'BookController')->middleware('auth')->middleware('is_admin');
 Route::resource('categories', 'CategoryController')->middleware('auth')->middleware('is_admin');
 Route::get('/category/{id}', 'CategoryUserController@show')->middleware('auth')->middleware('is_user');
-Route::resource('comments','CommentController')->middleware('auth')->middleware('is_user');
+Route::resource('comments', 'CommentController')->middleware('auth')->middleware('is_user');
 Route::get('/edit', 'CommentController@edit')->middleware('auth')->middleware('is_user');
 Route::post('book/{book}', 'BookController@returnBack')->name('Books.returnBack')->middleware('auth')->middleware('is_user');
 
-Route::resource('lease','LeaseController')->middleware('auth')->middleware('is_user');
+Route::resource('lease', 'LeaseController')->middleware('auth')->middleware('is_user');
 Route::get('/dashboard/users', 'UserController@index')->middleware('auth')->middleware('is_admin');
 Route::get('/dashboard/editUser', 'UserController@edit')->middleware('auth')->middleware('is_admin');
 Route::get('users', 'UserController@ban')->name('users.ban')->middleware('auth')->middleware('is_admin');
+Route::get('/home/profile', 'UserController@editProfile')->name('users.editProfile')->middleware('auth')->middleware('is_user');
+Route::get('users', 'UserController@updateProfile')->name('users.updateProfile')->middleware('auth')->middleware('is_user');
 
 Route::get('/dashboard/categories', 'CategoryController@index')->middleware('is_admin')->middleware('auth');
 
