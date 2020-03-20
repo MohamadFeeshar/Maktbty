@@ -49,8 +49,9 @@ class LeaseController extends Controller
     {
         // dd( Auth::id());
         // die();
+        $user_id=Auth::id();
         $request->validate([
-            'book_id' => 'unique:leases,book_id,NULL,id,deleted_at,NULL',
+            'book_id' => 'unique:leases,book_id,NULL,id,deleted_at,'.$user_id,
         ]);
         $lease = new Lease();
         $lease->user_id = Auth::id();
