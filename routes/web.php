@@ -52,3 +52,6 @@ Route::get('/category', 'HomeController@category')->name('category')->middleware
 Route::get('/order', 'HomeController@order')->name('order')->middleware('is_user');
 Route::post('favoriteToggle', 'FavoriteController@addRemove')->name('addRemoveFavorite')->middleware('is_user');
 Route::get('/favourite', 'FavoriteController@store')->name('favourite')->middleware('is_user');
+Route::get('/orderByCategory', 'HomeController@orderByCategory')->name('orderByCategory')->middleware('is_user');
+Route::get('/searchByCategory', 'HomeController@searchByCategory')->name('searchByCategory')->middleware('is_user');
+Route::get('/userHome', 'HomeController@userHome')->name('userHome')->middleware('is_user');

@@ -25,7 +25,11 @@
 
 <!-- Add custom CSS here -->
     <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/css/now-ui-dashboard.css?v=1.5.0') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/demo/demo.css') }}" rel="stylesheet" />
     <!-- Styles -->
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/user.css') }}" rel="stylesheet">
     <link href="{{ asset('css/favorite.css') }}" rel="stylesheet">
