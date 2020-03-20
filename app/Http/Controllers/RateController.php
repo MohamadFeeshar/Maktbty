@@ -29,6 +29,14 @@ class RateController extends Controller
         //
     }
 
+    
+    private function calc($arr){
+        $sum = 0;
+        for($i = 0; i < $arr; $i++){
+            $sum+=$arr[$i];
+        }
+        return $sum/count($arr);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -41,10 +49,13 @@ class RateController extends Controller
             return response()->json(['failed' => 'invalid rating']);
         }
         $userId = Auth::id();
+        
         $exist = DB::table('rates')->where('user_id', $userId)->where('book_id', $request->bookId);
         if ($exist->exists()) {
             $exist->update(['rate' => $request->rate]);
-            return response()->json(['success' => 'updated']);
+            $book_rates = DB::table('rates')->where('book_id', $request->bookId)->get(['rate'])[0]->rate;
+            
+            return response()->json(['success' => $book_rates]);
         }
         $rate = new Rate();
         $rate->user_id = Auth::id();
