@@ -74,12 +74,12 @@ class BookPolicy
     }
     public function canLease(User $user,Book $book)
     {
-        return Lease::where('user_id' , Auth::id() ) -> where('book_id' , $book->id )-> where('returned_at', null) -> exists()?false : true ;
+        return Lease::where('user_id' , Auth::id() ) -> where('book_id' , $book->id )-> where('deleted_at', null) -> exists()?false : true ;
         // return true;
     }
     public function canReturn(User $user,Book $book)
     {
-        return Lease::where('user_id' , Auth::id() ) -> where('book_id' , $book->id )->where('returned_at', null) -> exists();
+        return Lease::where('user_id' , Auth::id() ) -> where('book_id' , $book->id )->where('deleted_at', null) -> exists();
 
     }
     /**

@@ -113,6 +113,9 @@ Dashboard
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
               </select>
+              @error('category')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
             </div>
             <div class="form-group">
               <label>Price</label>

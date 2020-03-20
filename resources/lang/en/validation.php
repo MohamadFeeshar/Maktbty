@@ -120,7 +120,7 @@ return [
     
     /*
     |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
+    | Custom Validation Language Lines'book_id'
     |--------------------------------------------------------------------------
     |
     | Here you may specify custom validation messages for attributes using the
@@ -133,6 +133,9 @@ return [
         'favouriteTerm' => [
             'unique' => 'Book already in favourites',
         ],
+        'book_id' => [
+            'unique' => 'Book already leased',
+        ]
     ],
 
     /*

@@ -39,7 +39,7 @@ class BookController extends Controller
     public function returnBack($id){
         $book = Book::find($id);
         $copies = DB::table('books')->increment('no_copies', 1);
-        Lease::where('user_id' , Auth::id() )->where ('book_id',$book->id)->where('returned_at',null)->update(['returned_at'=>now()]);
+        Lease::where('user_id' , Auth::id() )->where ('book_id',$book->id)->delete();
         return back()->withInput();
     }
 
@@ -61,8 +61,9 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|unique:books,title,NULL,id,deleted_at,NULL',
+            'title' => 'required|string|unique:books,title,NULL,user_id,deleted_at,NULL',
             'author' => 'required|string',
+            // 'category' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required|numeric',
             'no_copies' => 'required|numeric'
