@@ -19,7 +19,7 @@ foreach ($profit as $val) {
 
       var chart = new CanvasJS.Chart("chartContainer", {
         title: {
-          text: "Profit Over a Week"
+          text: "Profit Over last Week"
         },
         axisX: {
           title: "Week",

@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    @yield('title')
+Maktbty
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -54,12 +54,12 @@
           @foreach($list_category as $category)  
 
           <li>
-            <a href="/category/{{$category->id}}" class="list-group-item" style="background-color:grey;">
-              <h2>{{ $category->name }}</h2>
+            <a href="/category/{{$category->id}}" class="list-group-item" style="background-color:grey;height:4rem;">
+              <h2 style="color:white;font-weight: bold;display:flex;justify-content:center;align-items:center;">{{ $category->name }}</h2>
             </a>
           </li>
           @endforeach
-</div>
+          </div>
           </ul>
       </div>
     </div>
@@ -70,46 +70,25 @@
  
 
       <div class="panel-header panel-header-sm">
-      <ul class="navbar-nav mr-auto" style="display:inline-block;">
+      <ul class="navbar-nav mr-auto" style="display:inline-block;justify-content:center;align-items:center;">
 
         <li class="navbar-brand" >
-        <a class="nav-link" style="color:white;" href="{{route('home')}}">Maktbty <span class="sr-only">(current)</span></a>
+        <a class="nav-link" style="color:white;" onMouseOver="this.style.color='#0F0'"onMouseOut="this.style.color='#fff'" href="{{route('home')}}">Maktbty <span class="sr-only">(current)</span></a>
         </li>
         
         <li class="navbar-brand" >
-        <a class="nav-link"   style="color:white;" href="{{route('myBooks')}}">MyBooks <span class="sr-only">(current)</span></a></li>
+        <a class="nav-link"   style="color:white;" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#fff'" href="{{route('myBooks')}}">MyBooks <span class="sr-only">(current)</span></a>
+        </li>
 
         <li class="navbar-brand" >
-        <a class="nav-link"  style="color:white;"href="{{route('fav')}}">Favourites <span class="sr-only">(current)</span></a>
+        <a class="nav-link"  style="color:white;" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#fff'"href="{{route('fav')}}">Favourites <span class="sr-only">(current)</span></a>
 
         </li>
-      <li class="navbar-brand" >
+<span><span>   
+                @yield('searchOrder')
+                <span></span>
 
-     <span style="color:white;"> Order By</span>
-            <form action="order" method="GET">
-                {{csrf_field()}}
-                <div class="input-group">
-                    <span class="input-group-btn">
-                    <button type="submit" name="order" class="btn btn-secondary"value="created_at">Latest</button>
-                    <button class="btn btn-secondary" name="order" type="submit" value="price">Price</button>
-         
-                    </span>
-                </div>
-            </form>
-       
-</li>
-<li class="navbar-brand" >
-            <form action="home" method="GET">
-                {{csrf_field()}}
-                <div class="input-group">
-                    <input type="search" class="form-control mr-sm-2" name="searchTerm" placeholder="Search for..." value="{{ isset($searchTerm) ? $searchTerm : '' }}">
-                    <!-- <span class="input-group-btn"> -->
-                        <!-- <button class="btn btn-secondary" type="submit">Search</button> -->
-                    <!-- </span> -->
-                </div>
-            </form>
-    </li>
-    </ul>    
+      </ul>    
 <span></span>
 </div>
       <div class="content" style="display:flex;justify-content:start;align-items:start;">

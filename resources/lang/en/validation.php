@@ -117,10 +117,10 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
-
+    
     /*
     |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
+    | Custom Validation Language Lines'book_id'
     |--------------------------------------------------------------------------
     |
     | Here you may specify custom validation messages for attributes using the
@@ -130,9 +130,15 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'favouriteTerm' => [
+            'unique' => 'Book already in favourites',
         ],
+        'book_id' => [
+            'unique' => 'Book already leased',
+        ],
+        'category_id' => [
+            'required' => 'Category required',
+        ]
     ],
 
     /*

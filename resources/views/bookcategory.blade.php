@@ -67,7 +67,7 @@
       </div>
     @endforeach
     </div>
-    <div class="pageLinks">  {{$book_data ->appends(Request::except('page'))-> links()}}</div>
+    <div class="pageLinks"style="display:flex;justify-content:center;align-items:center;">  {{$book_data ->appends(Request::except('page'))-> links()}}</div>
 
     </div>
 
