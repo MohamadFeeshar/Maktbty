@@ -84,39 +84,11 @@ Maktbty
         <a class="nav-link"  style="color:white;" onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#fff'"href="{{route('fav')}}">Favourites <span class="sr-only">(current)</span></a>
 
         </li>
-             <!-- <span style="color:white;"> Order By</span> -->
-        <li class="navbar-brand">
-        <span class="nav-link"  style="color:white;">Order By <span class="sr-only">(current)</span></span>
+<span><span>   
+                @yield('searchOrder')
+                <span></span>
 
-        </li>
-      <li class="navbar-brand" >
-
-     <!-- <span style="color:white;"> Order By</span> -->
-     <span class="sr-only">(current)</span>
-            <form action="order" method="GET">
-                {{csrf_field()}}
-                <div class="input-group">
-                    <span class="input-group-btn">
-                    <button type="submit" name="order" class="btn btn-secondary"value="created_at">Latest</button>
-                    <button class="btn btn-secondary" name="order" type="submit" value="price">Price</button>
-         
-                    </span>
-                </div>
-            </form>
-       
-</li>
-<li class="navbar-brand" >
-            <form action="home" method="GET">
-                {{csrf_field()}}
-                <div class="input-group">
-                    <input type="search" class="form-control mr-sm-2" name="searchTerm" placeholder="Search for..." value="{{ isset($searchTerm) ? $searchTerm : '' }}">
-                    <!-- <span class="input-group-btn"> -->
-                        <!-- <button class="btn btn-secondary" type="submit">Search</button> -->
-                    <!-- </span> -->
-                </div>
-            </form>
-    </li>
-    </ul>    
+      </ul>    
 <span></span>
 </div>
       <div class="content" style="display:flex;justify-content:start;align-items:start;">

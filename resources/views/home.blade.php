@@ -1,7 +1,26 @@
 @extends('layouts.userHome')
 @section('content')
 
+@section('searchOrder')
+<li class="navbar-brand">
+    <span class="nav-link"  style="color:white;">Order By <span class="sr-only">(current)</span></span>
 
+</li>
+<li class="navbar-brand">
+
+    <form action="home" method="GET" >
+        {{csrf_field()}}
+        <div class="input-group">
+            <button type="submit" name="order" class="btn btn-secondary"value="created_at">Latest</button>
+            <span class="sr-only">(current)</span>
+
+            <button class="btn btn-secondary" name="order" type="submit" value="price">Price</button>
+            <span class="sr-only">(current)</span>
+            <input type="search" class="form-control mr-sm-2" name="searchTerm" placeholder="Search by author or title for..." value="{{ isset($searchTerm) ? $searchTerm : '' }}">
+        </div>
+    </form>
+</li>
+@endsection
 <!-- <div class="container">
 <div class="row"> -->
 
