@@ -54,6 +54,7 @@ class LeaseController extends Controller
         $copies = DB::table('books')->join('leases', 'books.id', '=', 'leases.book_id')->decrement('no_copies', 1);
         $lease->duration = $request->duration;
         $lease->save();
+        // $copies->save();
         return back()->withInput();
         // return redirect()->route('/book', ['id' => $request->book_id]);
         // return view('books.getdetails', ['id' => $id]);
