@@ -98,7 +98,12 @@
         <span></span>
       </div>
       <div class="content" style="display:flex;justify-content:start;align-items:start;">
-        @yield('content')
+      @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+      @endif
+      @yield('content')
       </div>
 
       <!-- end Content  -->
