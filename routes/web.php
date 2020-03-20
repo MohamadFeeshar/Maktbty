@@ -53,6 +53,7 @@ Route::get('/book', 'BookController@getBookDetails')->name('books.getdetails')->
 Route::get('/category', 'HomeController@category')->name('category')->middleware('is_user');
 Route::get('/order', 'HomeController@order')->name('order')->middleware('is_user');
 Route::post('favoriteToggle', 'FavoriteController@addRemove')->name('addRemoveFavorite')->middleware('is_user');
+Route::post('rateBook', 'RateController@store')->name('rateBook')->middleware('is_user');
 Route::get('/favourite', 'FavoriteController@store')->name('favourite')->middleware('is_user');
 Route::get('/orderByCategory', 'HomeController@orderByCategory')->name('orderByCategory')->middleware('is_user');
 Route::get('/searchByCategory', 'HomeController@searchByCategory')->name('searchByCategory')->middleware('is_user');

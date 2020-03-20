@@ -1,45 +1,89 @@
-.categoryLinks{
+.bookCardText{
+    font-size: 1.2em;
+    line-height: 1.3;
+    font-weight: bold;
+}
+.content{
+    padding-top: 20px;
+}
+.categoryLinks {
     list-style-type: none;
 }
-.spacedCards{
-  border: 1px solid pink;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
+
+.spacedCards {
+    border: 1px solid pink;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
 }
-.img-book{
-    width:150px;
-    height:150px;
+
+.img-book {
+    width: 150px;
+    height: 150px;
 }
-.cards{
+
+.cards {
     background-color: #bada55;
-    flex-grow:1;
+    flex-grow: 1;
     margin: 10px;
     height: 50px;
 }
-.pageLinks{
+
+.pageLinks {
     display: flex;
     justify-content: center;
 }
-.spacedFav{
+
+.spacedFav {
     display: flex;
     justify-content: space-around;
 }
-.isfavoriteButton{
+
+.isfavoriteButton {
+    padding:20px;
+    text-align: center;
+    display: block;
     font-size: 2em;
     color: red;
     line-height: 0.1em;
 }
-.favoriteButton{
+
+.favoriteButton {
+    padding:20px;
+    text-align: center;
+    display: block;
     font-size: 2em;
     color: grey;
     line-height: 0.1em;
 }
-.isfavoriteButton:hover{
+
+.isfavoriteButton:hover {
     line-height: 0.1em;
     color: grey
 }
-.favoriteButton:hover{
+
+.favoriteButton:hover {
     line-height: 0.1em;
     color: red;
+}
+
+.rating {
+    direction: rtl;
+    font-size: 2em;
+}
+
+.rating>span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.rating>span:hover:before,
+.rating>span:hover~span:before {
+    content: "\2605";
+    position: absolute;
+    color: goldenrod;
+}
+.rated{
+    color:goldenrod;
 }
