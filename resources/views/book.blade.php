@@ -129,21 +129,22 @@
                         <a class="media-left" href="#">
                             <img src="{{ URL::to('/user') }}/favicon.png">
                         </a>
-                        <div class="media-body">
+                        <div class="media-body" style="border: 3px blue inset;">
                             <h4 class="media-heading user_name">{{$comment->user_id}}</h4>
-                            <small class="pull-right">{{$comment->created_at}}</small>
-                            <p>{{$comment->content}}</p>
-                            <p>{{$comment->rate}}</p>
+                            <h2 class="pull-right">{{$comment->created_at}}</h2>
+                            <h3>{{$comment->content}}</h3>
+                            <h3>{{$userRate}}</h3>
+                            <div style="display:inline-block">
                             {{-- <!-- <a href="/book/{{$book->id}}/edit" class="btn btn-primary">update</a> --> --}}
                             @can('update',$comment)
                             <a href="{{url('comments').'/'.$comment->id.'/edit'}}" value="{{$book->id}}" class="btn btn-primary">update</a>
                             @endcan
                             {!! Form::open(['route'=>['comments.destroy',$comment->id],'method' => 'DELETE']) !!}
                             @can('delete',$comment)
-                            <button type='submit' class='btn btn-danger'>delete</button>
+                            <button type='submit' style="float:right;border-radius:5px;" class='btn btn-danger'>delete</button>
                             @endcan
                             {!! Form::close() !!}
-
+                        </div>
                         </div>
                     </div>
                     @endforeach

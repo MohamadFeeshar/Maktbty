@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Middleware\Authorize;
 use PhpParser\Node\Expr\New_;
 use App\Comment;
+use App\Rate;
 class CommentController extends Controller
 {
     /**
@@ -41,9 +43,12 @@ class CommentController extends Controller
         $comment->user_id = Auth::id();
         $comment->book_id = $request->book_id;
         $comment->content = $request->comment;
-        $comment->rate = 4;
+        $comment->rate = '0';
+
+
+        // table('comments')->join('rates', 'comments.user_id', '=', 'rates.user_id')->select('rate')->get();
         $comment->save();
-        return back()->withInput()->with('alert','successful operation!');;
+        return back()->withInput()->with('alert','successful operation!');
     }
 
     /**
