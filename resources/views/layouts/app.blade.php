@@ -31,6 +31,7 @@
     <link href="{{ asset('css/favorite.css') }}" rel="stylesheet">
 
     @stack('css-styles')
+    @stack('book-styles')
 </head>
 <body>
     <div id="app">

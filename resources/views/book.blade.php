@@ -1,5 +1,10 @@
 
+
 @extends('layouts.app')
+
+@push('book-styles')
+    <link href="{{ asset('css/book.css') }}" rel="stylesheet" />
+@endpush
 
 @section('content')
 
@@ -145,7 +150,7 @@
 
                     <div class="col-lg-3 col-md-6">
                         <div class="item">
-                            <img src="{{ URL::to('/images') }}/{{$related->pic}}">
+                            <a href="{{url('book').'/'.$book->id}}"><img src="{{ URL::to('/images') }}/{{$related->pic}}" class="related-img"> </a>
                             <h3>{{$related->title}}</h3>
                             <h6><span class="price">{{$related->price}}</span> / <a href="#">Buy Now</a></h6>
                             <div class="hover">
