@@ -59,23 +59,14 @@
                     <h5 class="card-title"><a href="{{url('book').'/'.$book->id}}">{{$book -> title}}</a></h5>
 
                     <h4 class="pull-right">${{$book -> price}}</h4>
-                    <h6 class="card-text"> author is {{$book -> author}}, book pages are {{$book -> page_count}}.</h6>
-                    <h6 class="card-text">{{mb_strimwidth($book->summary, 0, 10,"...")}}<a target="_blank" href="{{url('book').'/'.$book->id}}" class="text-decoration-none">See more</a></h6>
+                    <p class="bookCardText">  Author: {{$book -> author}}</p>
+                    <p class="bookCardText"> Book pages: {{$book -> page_count}}.</p>
+                    <p class="bookCardText">{{mb_strimwidth($book->summary, 0, 10,"...")}}<a target="_blank" href="{{url('book').'/'.$book->id}}" class="text-decoration-none">See more</a></p>
 
-                    <h6> available copies :{{$book -> no_copies}}</h6>
-                    <form action="{{ route('favourite') }}" method="GET">
-                        {{csrf_field()}}
-                        <div class="input-group">
-                            <input type="hidden" class="form-control" name="favouriteTerm" value="{{ isset($book->id) ? $book->id : '' }}">
-                            <button type="submit">
-                                <i class="fas fa-heart" style="font-size: 200%;content: '\f004';" id="fav" onclick="{this.style.color = 'red'}"></i>
-                            </button>
-
-                        </div>
-                    </form>
-
-                    <!-- <div class=" card-body align-middle spacedFav"> -->
-                    <a href="#" class="{{in_array($book->id, $favorites) ? 'isfavoriteButton' : 'favoriteButton'}}"><i class="fas fa-heart"></i></a>
+                    <p class="bookCardText"> available copies :{{$book -> no_copies}}</p>
+                    
+                    <!-- Favorite button -->
+                    <i id="{{$book->id}}" class="toggleFavorite {{in_array($book->id, $favorites) ? 'isfavoriteButton' : 'favoriteButton'}} fas fa-heart"></i>
                     <!-- </div> -->
                     @can('canLease',$book)
                       <a @if ($book->no_copies > 0)href="#leaseBook" @endif  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Lease</span></a>

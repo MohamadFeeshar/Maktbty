@@ -10,10 +10,13 @@
         <img src="{{ URL::to('/images') }}/{{$book->pic}}"  style="width: 18rem;height:15rem;"class="img-book" alt="{{$book -> title}}'s pic">
         <div class="card-body">
             <h5 class="card-title"><a href="{{url('book').'/'.$book->id}}">{{$book -> title}}</a></h5>
-            <h6 class="card-text">  author is {{$book -> author}}, book pages are {{$book -> page_count}}.</h6>
-            <h6 class="card-text">{{mb_strimwidth($book->summary, 0, 10,"...")}}<a target="_blank" href="{{url('book').'/'.$book->id}}" class="text-decoration-none">See more</a></h6>
+            <h4 class="pull-right">${{$book -> price}}</h4>
+            <p class="bookCardText">  Author: {{$book -> author}}</p>
+            <p class="bookCardText"> Book pages: {{$book -> page_count}}.</p>
+            <p class="bookCardText">{{mb_strimwidth($book->summary, 0, 10,"...")}}<a target="_blank" href="{{url('book').'/'.$book->id}}" class="text-decoration-none">See more</a></p>
+            <p class="bookCardText"> available copies :{{$book -> no_copies}}</p>
             <div class=" card-body align-middle spacedFav">
-            <a href="#" class="{{in_array($book->id, $favorites) ? 'isfavoriteButton' : 'favoriteButton'}}"><i class="fas fa-heart"></i></a>
+              <i id="{{$book->id}}" class="toggleFavorite {{in_array($book->id, $favorites) ? 'isfavoriteButton' : 'favoriteButton'}} fas fa-heart"></i>
             </div>
         </div>
       </div>
