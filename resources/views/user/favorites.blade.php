@@ -18,6 +18,15 @@
 
             <p class="bookCardText"> available copies :{{$book -> no_copies}}</p>
             <div class=" card-body align-middle spacedFav">
+              <div style="font-size: 1.3em">
+                @for ($i = 0; $i < 5; $i++)
+                    @if($i < $book->rate)
+                        <span id="rate-{{$i}}" class="rated">☆</span>
+                    @else
+                        <span id="rate-{{$i}}" >☆</span>
+                    @endif
+                @endfor
+              </div>
             <i id="{{$book->id}}" class="fas fa-heart toggleFavorite isfavoriteButton"></i>
             </div>
         </div>

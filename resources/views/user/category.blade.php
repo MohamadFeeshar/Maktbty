@@ -41,6 +41,15 @@
             <p class="bookCardText">{{mb_strimwidth($book->summary, 0, 10,"...")}}<a target="_blank" href="{{url('book').'/'.$book->id}}" class="text-decoration-none">See more</a></p>
 
             <p class="bookCardText"> available copies :{{$book -> no_copies}}</p>
+            <div style="font-size: 1.3em">
+              @for ($i = 5; $i >= 1; $i--)
+                  @if($i <= $book->rate)
+                      <span id="rate-{{$i}}" >☆</span>
+                  @else
+                      <span id="rate-{{$i}}" class="rated">☆</span>
+                  @endif
+              @endfor
+            </div>
             <i id ="{{$book->id}}" class="fas fa-heart toggleFavorite {{in_array($book->id, $favorites) ? 'isfavoriteButton ' : 'favoriteButton ' }}" ></i>
 
         </div>
