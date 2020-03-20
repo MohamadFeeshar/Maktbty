@@ -10,11 +10,6 @@ My profile
 <div id="editUserModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            @if (session()->has('success'))
-            <div class="alert alert-success">
-                {{ session()->get('success') }}
-            </div>
-            @endif
             {{ Form::model($user, ['route' => ['users.updateProfile', $user->id], 'method' => 'put']) }}
             <div class="modal-header">
                 <h4 class="modal-title">Edit User</h4>
@@ -64,7 +59,7 @@ My profile
                 </div>
             </div>
             <div class="modal-footer">
-                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <input type="button" onclick="window.location='{{ url("/home") }}'" class="btn btn-default" data-dismiss="modal" value="Cancel">
                 <input type="submit" class="btn btn-success" value="Save">
             </div>
             {!! Form::close() !!}
