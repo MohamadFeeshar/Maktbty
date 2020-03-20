@@ -19,9 +19,10 @@ class FavoriteController extends Controller
     public function index()
     {
         $userId = Auth::id();
+        $list = \App\Category::all();
         $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
         $books = DB::table('books')->whereIn('id', $favorites)->paginate(3);
-        return view('user.favorites')->with(['books'=>$books]);
+        return view('user.favorites', ['list_category' => $list])->with(['books' => $books]);
     }
 
     /**
@@ -44,15 +45,21 @@ class FavoriteController extends Controller
     {
         $book = \App\Book::orderBy('price', 'DESC')->paginate(3);
         $categories = \App\Category::all();
-     
-        // $request->validate(['book_id' => 'Null|unique:favorites']);
-        $favorites =new Favorite();
-        $favorites->user_id = Auth::id();
+
+        $request->validate([
+            'favouriteTerm' => 'unique:favorites,book_id'
+        ]);
+        $userId = Auth::id();
+        $favorites = new Favorite();
+        $favorites->user_id = $userId;
         $favorites->book_id = $request->input('favouriteTerm');
         $favorites->save();
-    
-        return view('home', ['list_category' => $categories, 
-        'book_data'=>$book ]);
+        $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
+        $favorites = json_decode(json_encode($favorites), true);
+        return view('home', [
+            'list_category' => $categories,
+            'book_data' => $book, 'favorites' => $favorites
+        ]);
     }
 
     /**
@@ -103,19 +110,20 @@ class FavoriteController extends Controller
      *  @param  \Illuminate\Http\Request  $request
      *  @return \Illuminate\Http\Response
      */
-    
-    public function addRemove(Request $request){
+
+    public function addRemove(Request $request)
+    {
         $userId = Auth::id();
         $exist = DB::table('favorites')->where('user_id', $userId)->where('book_id', $request->bookId);
-        if($exist->exists()){
+        if ($exist->exists()) {
             $exist->delete();
-            return response()->json(['success'=>'deleted']);
+            return response()->json(['success' => 'deleted']);
         }
-        $favorites =new Favorite();
+        $favorites = new Favorite();
         $favorites->user_id = Auth::id();
         $favorites->book_id = $request->bookId;
         $favorites->save();
 
-        return response()->json(['success'=>'added']);
+        return response()->json(['success' => 'added']);
     }
 }

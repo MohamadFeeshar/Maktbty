@@ -20,12 +20,13 @@ class LeaseController extends Controller
     public function index()
     {
         $userId = Auth::id();
+        $list = \App\Category::all();
         // $books = DB::table('books')->rightJoin('leases', 'books.id', '=', 'leases.book_id', 'leases.user_id', '=', $userId)->get();
         $leases = DB::table('leases')->where('user_id', $userId)->pluck('book_id');
         $books = DB::table('books')->whereIn('id', $leases)->paginate(3);
         $favorites = DB::table('favorites')->where('user_id', $userId)->pluck('book_id');
         $favorites = json_decode(json_encode($favorites), true);
-        return view('user.myBooks')->with(compact('books', 'favorites'));
+        return view('user.myBooks',['list_category' => $list])->with(compact('books', 'favorites'));
     }
 
     /**
