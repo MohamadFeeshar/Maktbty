@@ -43,7 +43,7 @@ class CommentController extends Controller
         $comment->content = $request->comment;
         $comment->rate = 4;
         $comment->save();
-        return back()->withInput()->with('alert','comment created successfully!');;
+        return back()->withInput()->with('alert','successful operation!');;
     }
 
     /**
@@ -84,7 +84,7 @@ class CommentController extends Controller
         $comment->content = $request->comment;
         $comment->book_id;
         $comment->save();
-        return redirect(url('book', $comment->book_id));
+        return redirect(url('book', $comment->book_id))->with('alert','successful operation!');
     }
 
     /**
@@ -98,7 +98,7 @@ class CommentController extends Controller
         $comment = Comment::find($id);
         $this -> Authorize('delete',$comment);
         $comment->delete();
-        return back()->withInput();
+        return back()->withInput()->with('alert','successful operation!');
         // return redirect(url('book', $comment->book_id));
     }
 }

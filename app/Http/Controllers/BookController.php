@@ -40,7 +40,7 @@ class BookController extends Controller
         $book = Book::find($id);
         $copies = DB::table('books')->increment('no_copies', 1);
         Lease::where('user_id' , Auth::id() )->where ('book_id',$book->id)->delete();
-        return back()->withInput();
+        return back()->withInput()->with('alert','successful operation!');
     }
 
     /**
