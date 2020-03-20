@@ -36,7 +36,7 @@ Dashboard
                 <div class="form-group">
                     <label>Password</label>
                     {{ Form::password('password', ['class' => 'form-control','required']) }}
-                    @error('email')
+                    @error('password')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>

@@ -18,6 +18,9 @@ Dashboard
                 <div class="form-group">
                     <label>Full Name</label>
                     {!! Form::text('name', $value = null, ['class' => 'form-control']) !!}
+                    @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>username</label>
@@ -36,7 +39,7 @@ Dashboard
                 <div class="form-group">
                     <label>Password</label>
                     {{ Form::password('password', ['class' => 'form-control','required']) }}
-                    @error('email')
+                    @error('password')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>

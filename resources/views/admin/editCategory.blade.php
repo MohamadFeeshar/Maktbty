@@ -24,7 +24,10 @@ Dashboard
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    {!! Form::text('desc', $value = null, ['class' => 'form-control']) !!}
+                    {!! Form::text('description', $value = null, ['class' => 'form-control']) !!}
+                    @error('description')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="modal-footer">

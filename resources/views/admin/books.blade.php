@@ -25,19 +25,10 @@ Dashboard
             <h2>Manage <b>Books</b></h2>
           </div>
           <div class="col-sm-6">
-            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Book</span></a>
+            <a href="#addBook" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Book</span></a>
           </div>
         </div>
       </div>
-      @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-          @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-          @endforeach
-        </ul>
-      </div>
-      @endif
       <table class="table table-striped table-hover">
         <thead>
           <tr>
@@ -68,7 +59,7 @@ Dashboard
             <td>{{ $book->title }}</td>
             <td>{{ $book->author }}</td>
             <td>
-            <img src="{{ URL::to('/images') }}/{{$book->pic}}" alt="No image" height="80" width="60"></td>
+              <img src="{{ URL::to('/images') }}/{{$book->pic}}" alt="No image" height="80" width="60"></td>
             <td>{{ $book->category->name }}</td>
             <td>{{ $book->price }}</td>
             <td>{{ $book->no_copies }}</td>
@@ -85,7 +76,7 @@ Dashboard
       </table>
     </div>
     <!-- Add Modal HTML -->
-    <div id="addEmployeeModal" class="modal fade">
+    <div id="addBook" class="modal">
       <div class="modal-dialog">
         <div class="modal-content">
           {!! Form::open(['route' => 'books.store','method' => 'post', 'enctype' => "multipart/form-data"]) !!}
@@ -97,14 +88,23 @@ Dashboard
             <div class="form-group">
               <label>Title</label>
               <input name="title" type="text" class="form-control" required>
+              @error('title')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
             </div>
             <div class="form-group">
               <label>Author</label>
               <input name="author" type="text" class="form-control" required>
+              @error('author')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
             </div>
             <div>
               <label>Cover Image</label>
-              <input name="image" type="file" class="form-control" >
+              <input name="image" type="file" class="form-control">
+              @error('image')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
             </div>
             <div class="form-group">
               <label>Category</label>
@@ -117,10 +117,16 @@ Dashboard
             <div class="form-group">
               <label>Price</label>
               <input name="price" type="text" class="form-control" required>
+              @error('price')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
             </div>
             <div class="form-group">
               <label>Copies</label>
               <input name="no_copies" type="text" class="form-control" required>
+              @error('no_copies')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
             </div>
           </div>
           <div class="modal-footer">
@@ -140,9 +146,18 @@ Dashboard
 
 
 @section('scripts')
+
+@if (count($errors) > 0)
+<script>
+  $(document).ready(function() {
+    $('#addBook').modal('show');
+  });
+</script>
+@endif
+
 <script type="text/javascript">
   $(document).ready(function() {
-    // Activate tooltip
+    // Activate modal
     $('[data-toggle="tooltip"]').tooltip();
 
     // Select/Deselect checkboxes
