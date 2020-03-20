@@ -5,6 +5,9 @@
     
     <div class="container">
     <div class="spacedCards">
+    @if (count($books) == 0)
+      <p class="BookCardText" style="padding-top: 40px"> No Books added yet</p>
+    @else
     @foreach ($books as $book)
       <div class="card" class="col-md-9" style="width: 18rem;">
         <img src="{{ URL::to('/images') }}/{{$book->pic}}"  style="width: 18rem;height:15rem;"class="img-book" alt="{{$book -> title}}'s pic">
@@ -34,6 +37,6 @@
     <div class="pageLinks"style="display:flex;justify-content:center;align-items:center;">  {{$books ->appends(Request::except('page'))-> links()}}</div>
 
     </div>
-
+    @endif
 </div>
 @endsection

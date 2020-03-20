@@ -27,7 +27,7 @@
     <div class="container">
     <div class="spacedCards" >
     @if (count($books) == 0)
-      <p class="BookCardText" style="padding-top: 30"> No Books added yet</p>
+      <p class="BookCardText" style="padding-top: 40px"> No Books added yet</p>
     @else
     @foreach ($books as $book)
       <div class="card" class="col-md-9" style="width: 18rem;">
